@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . '/task.php';
+use LevNevinitsin\Business\Task;
+require_once __DIR__ . '/vendor/autoload.php';
 
 $task = new Task(1, 1);
 
