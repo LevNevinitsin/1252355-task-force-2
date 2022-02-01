@@ -1,0 +1,16 @@
+{
+    "name": "levne/taskforce",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Lev",
+            "email": "levnevinitsin@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "LevNevinitsin\\": "src/"
+        }
+    },
+    "require": {}
+}

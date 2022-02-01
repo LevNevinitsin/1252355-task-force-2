@@ -1,4 +1,5 @@
 <?php
+namespace LevNevinitsin\Business;
 
 class Task
 {
