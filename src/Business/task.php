@@ -37,14 +37,14 @@ class Task
         ],
     ];
 
-    private $executorId;
-    private $clientId;
+    private $customerId;
+    private $contractorId;
     private $currentStatus;
 
-    public function __construct(int $executorId, int $clientId)
+    public function __construct(int $customerId, int $contractorId)
     {
-        $this->executorId = $executorId;
-        $this->clientId = $clientId;
+        $this->customerId = $customerId;
+        $this->contractorId = $contractorId;
         $this->currentStatus = self::STATUS_NEW;
     }
 
