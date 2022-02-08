@@ -1,6 +1,13 @@
 <?php
 namespace LevNevinitsin\Business;
 
+use LevNevinitsin\Business\Action\Action;
+use LevNevinitsin\Business\Action\CancelAction;
+use LevNevinitsin\Business\Action\RespondAction;
+use LevNevinitsin\Business\Action\StartAction;
+use LevNevinitsin\Business\Action\DeclineAction;
+use LevNevinitsin\Business\Action\CompleteAction;
+
 class Task
 {
     const STATUS_NEW       = 'new';
@@ -9,58 +16,80 @@ class Task
     const STATUS_DONE      = 'done';
     const STATUS_FAILED    = 'failed';
 
-    const ACTION_CANCEL  = 'cancel';
-    const ACTION_RESPOND = 'respond';
-    const ACTION_CONFIRM = 'confirm';
-    const ACTION_DECLINE = 'decline';
-
     private $namesMap = [
         self::STATUS_NEW       => 'Новое',
         self::STATUS_CANCELLED => 'Отменено',
         self::STATUS_AT_WORK   => 'В работе',
         self::STATUS_DONE      => 'Выполнено',
         self::STATUS_FAILED    => 'Провалено',
-        self::ACTION_CANCEL    => 'Отменить',
-        self::ACTION_RESPOND   => 'Откликнуться',
-        self::ACTION_CONFIRM   => 'Выполнено',
-        self::ACTION_DECLINE   => 'Отказаться',
-    ];
-
-    private $transitionsMap = [
-        self::STATUS_NEW => [
-            self::ACTION_CANCEL => self::STATUS_CANCELLED,
-            self::ACTION_RESPOND => self::STATUS_AT_WORK,
-        ],
-        self::STATUS_AT_WORK => [
-            self::ACTION_CONFIRM => self::STATUS_DONE,
-            self::ACTION_DECLINE => self::STATUS_FAILED,
-        ],
     ];
 
     private $customerId;
     private $contractorId;
     private $currentStatus;
 
-    public function __construct(int $customerId, int $contractorId)
+    private $actionCancel;
+    private $actionRespond;
+    private $actionStart;
+    private $actionDecline;
+    private $actionComplete;
+
+    private $actionsMap;
+    private $transitionsMap;
+
+    public function __construct(int $customerId, ?int $contractorId = null)
     {
         $this->customerId = $customerId;
         $this->contractorId = $contractorId;
         $this->currentStatus = self::STATUS_NEW;
+
+        $this->actionCancel   = new CancelAction();
+        $this->actionRespond  = new RespondAction();
+        $this->actionStart    = new StartAction();
+        $this->actionDecline  = new DeclineAction();
+        $this->actionComplete = new CompleteAction();
+
+        $this->actionsMap = [
+            self::STATUS_NEW => [
+                $this->actionCancel,
+                $this->actionRespond,
+                $this->actionStart,
+            ],
+            self::STATUS_AT_WORK => [
+                $this->actionDecline,
+                $this->actionComplete,
+            ],
+        ];
+
+        $this->transitionsMap = [
+            $this->actionCancel->getName()   => self::STATUS_CANCELLED,
+            $this->actionRespond->getName()  => self::STATUS_NEW,
+            $this->actionStart->getName()    => self::STATUS_AT_WORK,
+            $this->actionDecline->getName()  => self::STATUS_FAILED,
+            $this->actionComplete->getName() => self::STATUS_DONE,
+        ];
+
     }
 
-    public function getNextStatus(string $action): ?string
+    public function getNextStatus(Action $action): ?string
     {
-        return $this->transitionsMap[$this->currentStatus][$action] ?? null;
+        return $this->transitionsMap[$action->getName()] ?? null;
     }
 
-    public function getAvailableActions(): ?string
+    public function getAvailableActions(int $userId): array
     {
-        $actions = array_keys($this->transitionsMap[$this->currentStatus] ?? []);
-        return implode(', ', $actions);
+        $allActions = $this->actionsMap[$this->currentStatus] ?? [];
+
+        $customerId = $this->customerId;
+        $contractorId = $this->contractorId;
+
+        return array_filter($allActions, function ($action) use ($userId, $customerId, $contractorId): bool {
+            return $action->isUserAuthorized($userId, $customerId, $contractorId);
+        });
     }
 
-    public function takeAction(string $action)
+    public function takeAction(Action $action): void
     {
-        $this->currentStatus = $this->transitionsMap[$this->currentStatus][$action];
+        $this->currentStatus = $this->transitionsMap[$action->getName()];
     }
 }
