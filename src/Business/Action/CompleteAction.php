@@ -13,7 +13,7 @@ class CompleteAction extends Action
         return 'Завершить';
     }
 
-    public function isUserAuthorized(int $userId, int $customerId, ?int $contractorId = null): bool
+    public function isUserAuthorized(int $userId, string $userRole, int $customerId, ?int $contractorId = null): bool
     {
         if ($userId === $customerId) {
             return true;

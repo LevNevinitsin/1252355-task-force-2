@@ -5,6 +5,6 @@ abstract class Action
 {
     abstract public function getName(): string;
     abstract public function getInternalTitle(): string;
-    abstract public function isUserAuthorized(int $customerId, int $contractorId, int $userId): bool;
+    abstract public function isUserAuthorized(int $userId, string $userRole, int $customerId, ?int $contractorId = null): bool;
 }
 

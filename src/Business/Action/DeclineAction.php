@@ -13,7 +13,7 @@ class DeclineAction extends Action
         return 'Отказаться';
     }
 
-    public function isUserAuthorized(int $userId, int $customerId, ?int $contractorId = null): bool
+    public function isUserAuthorized(int $userId, string $userRole, int $customerId, ?int $contractorId = null): bool
     {
         if ($userId === $contractorId) {
             return true;

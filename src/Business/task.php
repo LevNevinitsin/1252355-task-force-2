@@ -7,6 +7,7 @@ use LevNevinitsin\Business\Action\RespondAction;
 use LevNevinitsin\Business\Action\StartAction;
 use LevNevinitsin\Business\Action\DeclineAction;
 use LevNevinitsin\Business\Action\CompleteAction;
+use LevNevinitsin\Business\Exception\TaskException;
 
 class Task
 {
@@ -37,11 +38,24 @@ class Task
     private $actionsMap;
     private $transitionsMap;
 
-    public function __construct(int $customerId, ?int $contractorId = null)
+    public function __construct(string $taskStatus, int $customerId, ?int $contractorId = null)
     {
         $this->customerId = $customerId;
         $this->contractorId = $contractorId;
-        $this->currentStatus = self::STATUS_NEW;
+
+        $reflection = new \ReflectionClass(__CLASS__);
+        $constants = $reflection->getConstants();
+        $statusConstants = array_filter($constants, function($constantName): bool {
+            return str_starts_with($constantName, 'STATUS');
+        }, ARRAY_FILTER_USE_KEY);
+
+        $taskStatusConstName = array_search($taskStatus, $statusConstants, true);
+
+        if (!$taskStatusConstName) {
+            throw new TaskException("статуса \"{$taskStatus}\" не существует.");
+        }
+
+        $this->currentStatus = $statusConstants[$taskStatusConstName];
 
         $this->actionCancel   = new CancelAction();
         $this->actionRespond  = new RespondAction();
@@ -76,15 +90,21 @@ class Task
         return $this->transitionsMap[$action->getName()] ?? null;
     }
 
-    public function getAvailableActions(int $userId): array
+    public function getAvailableActions(int $userId, string $userRole): array
     {
+        $possibleRoles = ['customer', 'contractor'];
+
+        if (!in_array($userRole, $possibleRoles)) {
+            throw new TaskException("роли \"{$userRole}\" не существует.");
+        }
+
         $allActions = $this->actionsMap[$this->currentStatus] ?? [];
 
         $customerId = $this->customerId;
         $contractorId = $this->contractorId;
 
-        return array_filter($allActions, function ($action) use ($userId, $customerId, $contractorId): bool {
-            return $action->isUserAuthorized($userId, $customerId, $contractorId);
+        return array_filter($allActions, function ($action) use ($userId, $userRole, $customerId, $contractorId): bool {
+            return $action->isUserAuthorized($userId, $userRole, $customerId, $contractorId);
         });
     }
 
