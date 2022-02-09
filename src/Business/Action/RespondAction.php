@@ -13,9 +13,9 @@ class RespondAction extends Action
         return 'Откликнуться';
     }
 
-    public function isUserAuthorized(int $userId, int $customerId, ?int $contractorId = null): bool
+    public function isUserAuthorized(int $userId, string $userRole, int $customerId, ?int $contractorId = null): bool
     {
-        if ($userId !== $customerId) {
+        if ($userRole === 'contractor') {
             return true;
         }
 
