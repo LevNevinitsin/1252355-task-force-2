@@ -7,13 +7,15 @@ USE taskforce;
 CREATE TABLE category (
     PRIMARY KEY (id),
     id    SMALLINT UNSIGNED  NOT NULL  AUTO_INCREMENT,
-    name  VARCHAR(50)        NOT NULL  UNIQUE
+    name  VARCHAR(50)        NOT NULL  UNIQUE        ,
+    icon  VARCHAR(50)        NOT NULL
 );
 
 CREATE TABLE city (
     PRIMARY KEY (id),
-    id    INT UNSIGNED  NOT NULL  AUTO_INCREMENT,
-    name  VARCHAR(50)   NOT NULL
+    id           INT UNSIGNED  NOT NULL  AUTO_INCREMENT,
+    name         VARCHAR(50)   NOT NULL                ,
+    coordinates  POINT         NOT NULL
 );
 
 CREATE TABLE task_status (
@@ -69,7 +71,6 @@ CREATE TABLE task (
     description     TEXT               NOT NULL                          ,
     category_id     SMALLINT UNSIGNED  NOT NULL                          ,
     city_id         INT UNSIGNED                                         ,
-    coortinates     POINT                                                ,
     budget          INT UNSIGNED                                         ,
     deadline        DATE                                                 ,
     task_status_id  TINYINT UNSIGNED   NOT NULL                          ,
