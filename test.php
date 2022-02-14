@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 use LevNevinitsin\Business\Task;
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -16,8 +18,8 @@ $actionDecline  = new DeclineAction();
 $actionComplete = new CompleteAction();
 
 error_reporting(E_ALL);
-ini_set('display_errors', true);
-ini_set('log_errors', false);
+ini_set('display_errors', 'true');
+ini_set('log_errors', 'false');
 
 try {
     $task = new Task('new', 1, 2);
