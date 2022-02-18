@@ -9,7 +9,8 @@ use Yii;
  *
  * @property int $id
  * @property string $name
- * @property string $coordinates
+ * @property float $latitude
+ * @property float $longitude
  *
  * @property Task[] $tasks
  * @property User[] $users
@@ -30,8 +31,8 @@ class City extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'coordinates'], 'required'],
-            [['coordinates'], 'string'],
+            [['name', 'latitude', 'longitude'], 'required'],
+            [['latitude', 'longitude'], 'number'],
             [['name'], 'string', 'max' => 50],
         ];
     }
@@ -44,7 +45,8 @@ class City extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
-            'coordinates' => 'Coordinates',
+            'latitude' => 'Latitude',
+            'longitude' => 'Longitude',
         ];
     }
 

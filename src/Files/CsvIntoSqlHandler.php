@@ -85,7 +85,7 @@ class CsvIntoSqlHandler
         $cityName = $cityAttributes[0];
         $coordinateLat = $cityAttributes[1];
         $coordinateLong = $cityAttributes[2];
-        return "'$cityName', POINT($coordinateLat, $coordinateLong)";
+        return "'$cityName', $coordinateLat, $coordinateLong";
     }
 
     private function getHeaderData(): ?array {
