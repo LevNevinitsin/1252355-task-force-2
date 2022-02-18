@@ -13,9 +13,10 @@ CREATE TABLE category (
 
 CREATE TABLE city (
     PRIMARY KEY (id),
-    id           INT UNSIGNED  NOT NULL  AUTO_INCREMENT,
-    name         VARCHAR(50)   NOT NULL                ,
-    coordinates  POINT         NOT NULL
+    id           INT UNSIGNED    NOT NULL  AUTO_INCREMENT,
+    name         VARCHAR(50)     NOT NULL                ,
+    latitude     DECIMAL(10, 8)  NOT NULL                ,
+    longitude    DECIMAL(11, 8)  NOT NULL
 );
 
 CREATE TABLE task_status (
