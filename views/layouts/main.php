@@ -70,7 +70,7 @@ AppAsset::register($this);
 </header>
 
 <main class="main-content container">
-    <?= '<h1>Hello world</h1>' ?>
+    <?= $content ?>
 </main>
 
 <?php $this->endBody() ?>
