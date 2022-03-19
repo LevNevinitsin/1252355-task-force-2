@@ -9,6 +9,7 @@ use Yii;
  *
  * @property int $id
  * @property string $name
+ * @property string $code
  *
  * @property Task[] $tasks
  */
@@ -28,9 +29,11 @@ class TaskStatus extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
+            [['name', 'code'], 'required'],
             [['name'], 'string', 'max' => 50],
+            [['code'], 'string', 'max' => 30],
             [['name'], 'unique'],
+            [['code'], 'unique'],
         ];
     }
 
@@ -42,6 +45,7 @@ class TaskStatus extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
+            'code' => 'Code',
         ];
     }
 
@@ -52,6 +56,6 @@ class TaskStatus extends \yii\db\ActiveRecord
      */
     public function getTasks()
     {
-        return $this->hasMany(Task::class, ['task_status_id' => 'id'])->inverseOf('task');
+        return $this->hasMany(Task::class, ['task_status_id' => 'id'])->inverseOf('taskStatus');
     }
 }
