@@ -4,9 +4,11 @@
 /** @var string $content */
 
 use app\assets\AppAsset;
+use app\assets\MainAsset;
 use yii\bootstrap4\Html;
 
 AppAsset::register($this);
+MainAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -17,7 +19,6 @@ AppAsset::register($this);
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-    <link rel="stylesheet" href="css/style.css">
 </head>
 
 
