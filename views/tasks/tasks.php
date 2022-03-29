@@ -1,7 +1,6 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\widgets\ActiveField;
 ?>
 
 <div class="left-column">
@@ -43,61 +42,79 @@ use yii\widgets\ActiveField;
 </div>
 <div class="right-column">
     <div class="right-card black">
-        <div class="search-form">
-            <?php
-            $form = ActiveForm::begin([
-                'id' => 'tasks-filter-form',
-                'action' => '/tasks',
-                'method' => 'get',
-                'options' => [],
-            ]); ?>
+        <?php
+        $form = ActiveForm::begin([
+            'id' => 'tasks-filter-form',
+            'action' => '/tasks',
+            'method' => 'get',
+            'options' => ['class' => 'search-form'],
+        ]); ?>
 
-                <h4 class="head-card">Категории</h4>
-                <?= $form->field($categoryModel, 'id', ['template' => '{input}'])->checkBoxList($categories, [
-                    'tag' => false,
-                    'item' => function($index, $label, $name, $checked, $value) use ($selectedCategories) {
-                        $checkedStatus = in_array($value, $selectedCategories) ? ' checked' : '';
+            <div class="fields-container">
+                <fieldset class="fieldset">
+                    <h4 class="head-card">Категории</h4>
+                    <?= $form->field($categoryModel, 'id', [
+                        'template' => '{input}',
+                        'options' => ['tag' => false],
+                    ])->checkBoxList($categories, [
+                        'tag' => false,
+                        'item' => function($index, $label, $name, $checked, $value) use ($selectedCategories) {
+                            $checkedStatus = in_array($value, $selectedCategories) ? ' checked' : '';
 
-                        return "<label><input type=\"checkbox\" name=\"$name\" value=\"$value\"$checkedStatus>"
-                        . Html::encode($label)
-                        . "</label>";
-                    },
-                    'unselect' => null,
-                ]) ?>
+                            return "<label><input class=\"checkbox\" type=\"checkbox\" name=\"$name\" value=\"$value\"$checkedStatus> "
+                            . Html::encode($label)
+                            . "</label>";
+                        },
+                        'unselect' => null,
 
-                <h4 class="head-card">Дополнительно</h4>
-                <?= $form->field($taskModel, 'city_id')->checkbox([
-                    'uncheck' => null,
-                    'label' => 'Удалённая работа',
-                    'name' => 'showRemoteOnly',
-                    'value' => 1,
-                    'checked' => $shouldShowRemoteOnly ? '' : null,
-                ]) ?>
-                <?= $form->field($taskModel, 'city_id')->checkbox([
-                    'uncheck' => null,
-                    'label' => 'Без откликов',
-                    'name' => 'showWithoutResponses',
-                    'value' => 1,
-                    'checked' => $shouldShowWithoutResponses ? '' : null,
-                ]) ?>
+                    ]) ?>
+                </fieldset>
 
-                <h4 class="head-card">Период</h4>
-                <?= $form->field($taskModel, 'date_created', ['template' => '{input}'])->dropDownList(
-                    [
-                        '01:00:00' => '1 час',
-                        '12:00:00' => '12 часов',
-                        '24:00:00' => '24 часа',
-                    ],
-                    [
-                        'prompt' => 'Выберите период',
-                        'options' => [
-                            $selectedPeriod => ['selected' => ''],
+                <fieldset class="fieldset">
+                    <h4 class="head-card">Дополнительно</h4>
+                    <?= $form->field($taskModel, 'city_id', [
+                        'template' => '{input}{label}',
+                        'options' => ['tag' => false],
+                    ])->checkbox([
+                        'uncheck' => null,
+                        'label' => 'Удалённая работа',
+                        'name' => 'showRemoteOnly',
+                        'value' => 1,
+                        'checked' => $shouldShowRemoteOnly ? '' : null,
+                        'class' => 'checkbox',
+                    ]) ?>
+                    <?= $form->field($taskModel, 'id', [
+                        'template' => '{input}{label}',
+                        'options' => ['tag' => false],
+                    ])->checkbox([
+                        'uncheck' => null,
+                        'label' => 'Без откликов',
+                        'name' => 'showWithoutResponses',
+                        'value' => 1,
+                        'checked' => $shouldShowWithoutResponses ? '' : null,
+                        'class' => 'checkbox',
+                    ]) ?>
+                </fieldset>
+
+                <fieldset class="fieldset">
+                    <h4 class="head-card">Период</h4>
+                    <?= $form->field($taskModel, 'date_created', ['template' => '{input}'])->dropDownList(
+                        [
+                            '01:00:00' => '1 час',
+                            '12:00:00' => '12 часов',
+                            '24:00:00' => '24 часа',
                         ],
-                    ]
-                ) ?>
+                        [
+                            'prompt' => 'Выберите период',
+                            'options' => [
+                                $selectedPeriod => ['selected' => ''],
+                            ],
+                        ]
+                    ) ?>
+                </fieldset>
+            </div>
 
-                <?= HTML::submitButton('Искать', ['class' => 'button button--blue']); ?>
-            <?php ActiveForm::end() ?>
-        </div>
+            <?= HTML::submitButton('Искать', ['class' => 'button button--blue']); ?>
+        <?php ActiveForm::end() ?>
     </div>
 </div>

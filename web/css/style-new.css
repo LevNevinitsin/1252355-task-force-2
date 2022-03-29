@@ -1,0 +1,43 @@
+.search-form {
+  padding-bottom: 0;
+}
+
+.search-form .fields-container {
+  margin-bottom: 40px;
+}
+
+.search-form .fieldset {
+  padding: 0;
+
+  border: none;
+}
+
+.search-form .fieldset:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.search-form .head-card {
+  margin-bottom: 5px;
+}
+
+.search-form .fieldset label {
+  display: block;
+}
+
+.search-form .fieldset label:not(:last-child) {
+  margin-bottom: 8px;
+}
+
+.search-form .checkbox {
+  margin-right: 10px;
+}
+
+.search-form select {
+  width: calc(100% - 17px * 2);
+  margin: 0;
+}
+
+.button.button--blue {
+  width: calc(100% - 26px * 2);
+  margin: 0;
+}
