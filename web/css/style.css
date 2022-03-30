@@ -1201,12 +1201,12 @@ select {
   background-size: 20px 12px;
   background-position: 260px 14px; }
 
-.search-form .head-card:not(.head-card:first-child) {
+/* .search-form .head-card:not(.head-card:first-child) {
   margin-top: 33px;
-  margin-bottom: 0; }
+  margin-bottom: 0; } */
 
-.search-form .head-card:first-child {
-  margin-bottom: 0; }
+/* .search-form .head-card:first-child {
+  margin-bottom: 0; } */
 
 .search-form select {
   margin-top: 20px;

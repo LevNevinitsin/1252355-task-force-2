@@ -21,6 +21,7 @@ use Yii;
  * @property int|null $score
  * @property string|null $feedback
  * @property string $date_created
+ * @property int $responsesCount
  *
  * @property Category $category
  * @property City $city
@@ -32,6 +33,8 @@ use Yii;
  */
 class Task extends \yii\db\ActiveRecord
 {
+    public $responsesCount;
+
     /**
      * {@inheritdoc}
      */
@@ -129,7 +132,7 @@ class Task extends \yii\db\ActiveRecord
      */
     public function getResponses()
     {
-        return $this->hasMany(Response::class, ['task_id' => 'id']);
+        return $this->hasMany(Response::class, ['task_id' => 'id'])->inverseOf('task');
     }
 
     /**
