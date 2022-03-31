@@ -3,15 +3,20 @@
 use yii\db\Migration;
 
 /**
- * Class m220317_072043_insert_rows_into_role
+ * Handles the creation of table `{{%role}}`.
  */
-class m220317_072043_insert_rows_into_role extends Migration
+class m220331_082121_create_role_table extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
+        $this->createTable('{{%role}}', [
+            'id' => $this->primaryKey(),
+            'name' => $this->string(50)->notNull()->unique(),
+        ]);
+
         $this->batchInsert('role', ['name'], [
             ['customer'],
             ['contractor'],
@@ -24,5 +29,6 @@ class m220317_072043_insert_rows_into_role extends Migration
     public function safeDown()
     {
         $this->delete('role');
+        $this->dropTable('{{%role}}');
     }
 }

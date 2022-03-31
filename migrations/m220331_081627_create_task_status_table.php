@@ -3,15 +3,21 @@
 use yii\db\Migration;
 
 /**
- * Class m220317_071506_insert_rows_into_task_status
+ * Handles the creation of table `{{%task_status}}`.
  */
-class m220317_071506_insert_rows_into_task_status extends Migration
+class m220331_081627_create_task_status_table extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
+        $this->createTable('{{%task_status}}', [
+            'id' => $this->primaryKey(),
+            'name' => $this->string(50)->notNull()->unique(),
+            'code' => $this->string(50)->notNull()->unique(),
+        ]);
+
         $this->batchInsert('task_status', ['name', 'code'], [
             ['Новое', 'new'],
             ['Отменено', 'cancelled'],
@@ -27,5 +33,6 @@ class m220317_071506_insert_rows_into_task_status extends Migration
     public function safeDown()
     {
         $this->delete('task_status');
+        $this->dropTable('{{%task_status}}');
     }
 }
