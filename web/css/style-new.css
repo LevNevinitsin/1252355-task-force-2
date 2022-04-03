@@ -1,3 +1,12 @@
+:root {
+  --white: #ffffff;
+  --light: #f8f8f8;
+  --lightgrey: #bbbbbb;
+  --grey: #888888;
+}
+
+/* --- Tasks list --- */
+
 .search-form {
   padding-bottom: 0;
 }
@@ -37,7 +46,106 @@
   margin: 0;
 }
 
-.button.button--blue {
+.search-form .button.button--blue {
   width: calc(100% - 26px * 2);
   margin: 0;
+}
+
+/* --- Task page --- */
+
+.head-wrapper .head-main {
+  flex: 1 1 auto;
+  margin-right: 30px;
+}
+
+.head-wrapper .price {
+  flex: 0 1 auto;
+}
+
+.response-card {
+  display: grid;
+}
+
+.response-card--task {
+  grid-template-columns: 146px 1fr auto;
+}
+
+.response-card .response-message {
+  width: unset;
+}
+
+.response-card .price {
+  text-align: right;
+}
+
+.feedback-wrapper .link {
+  margin-bottom: 10px;
+}
+
+.response-card .response-wrapper .reviews {
+  margin-top: 0;
+}
+
+.stars-rating {
+  display: flex;
+  justify-content: center;
+}
+
+.stars-rating span {
+  margin-top: 0;
+}
+
+.stars-rating.small span::before {
+  height: 18px;
+}
+
+.black-list-link {
+  text-decoration-color: transparent;
+  color: var(--white);
+
+  transition: 0.15s;
+}
+
+.black-list-link:hover {
+  text-decoration-color: var(--white);
+}
+
+/* --- Absent avarars --- */
+
+.customer-photo--absent,
+.card-photo--absent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+  color: var(--grey);
+}
+
+.customer-photo--absent {
+  width: 126px;
+  height: 156px;
+  padding: 0 10px;
+}
+
+.card-photo--absent {
+  width: 190px;
+  height: 189px;
+
+  background-color: var(--light);
+  border: 1px solid var(--lightgrey);
+}
+
+/* --- User profile --- */
+
+.response-card--user-profile {
+  grid-template-columns: 120px 1fr auto;
+}
+
+.customer-photo--user-profile {
+  width: 90px;
+  height: 127px;
+  padding: 0 15px;
+
+  font-size: 16px;
 }

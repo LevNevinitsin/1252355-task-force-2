@@ -7,6 +7,8 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'language' => 'ru-RU',
+    'timeZone' => 'Europe/Moscow',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
@@ -47,8 +49,17 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'enableStrictParsing' => false,
-            'rules' => [],
+            'rules' => [
+                'tasks/view/<id:\d+>' => 'tasks/view',
+                'users/view/<id:\d+>' => 'users/view',
+            ],
         ],
+        'formatter' => [
+            'class' => '\app\components\FormatterHelper',
+            'defaultTimeZone' => 'Europe/Moscow',
+            'nullDisplay' => '',
+            'decimalSeparator' => '.',
+        ]
     ],
     'params' => $params,
 ];

@@ -31,7 +31,7 @@ class TaskStatus extends \yii\db\ActiveRecord
         return [
             [['name', 'code'], 'required'],
             [['name'], 'string', 'max' => 50],
-            [['code'], 'string', 'max' => 30],
+            [['code'], 'string', 'max' => 50],
             [['name'], 'unique'],
             [['code'], 'unique'],
         ];

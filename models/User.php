@@ -4,112 +4,38 @@ namespace app\models;
 
 use Yii;
 
-class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
+/**
+ * This is the model class for table "user".
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property string $password
+ * @property int $city_id
+ * @property string|null $birthdate
+ * @property string|null $photo
+ * @property string|null $phone
+ * @property string|null $telegram
+ * @property string|null $self_description
+ * @property int $role_id
+ * @property int $fails_count
+ * @property string $date_registered
+ *
+ * @property Category[] $categories
+ * @property ChosenCategory[] $chosenCategories
+ * @property City $city
+ * @property Response[] $responses
+ * @property Role $role
+ * @property Task[] $tasks
+ */
+class User extends \yii\db\ActiveRecord
 {
-    public $id;
-    public $username;
-    public $password;
-    public $authKey;
-    public $accessToken;
-
-    private static $users = [
-        '100' => [
-            'id' => '100',
-            'username' => 'admin',
-            'password' => 'admin',
-            'authKey' => 'test100key',
-            'accessToken' => '100-token',
-        ],
-        '101' => [
-            'id' => '101',
-            'username' => 'demo',
-            'password' => 'demo',
-            'authKey' => 'test101key',
-            'accessToken' => '101-token',
-        ],
-    ];
-
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function findIdentity($id)
-    {
-        return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function findIdentityByAccessToken($token, $type = null)
-    {
-        foreach (self::$users as $user) {
-            if ($user['accessToken'] === $token) {
-                return new static($user);
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * Finds user by username
-     *
-     * @param string $username
-     * @return static|null
-     */
-    public static function findByUsername($username)
-    {
-        foreach (self::$users as $user) {
-            if (strcasecmp($user['username'], $username) === 0) {
-                return new static($user);
-            }
-        }
-
-        return null;
-    }
-
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
         return 'user';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAuthKey()
-    {
-        return $this->authKey;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function validateAuthKey($authKey)
-    {
-        return $this->authKey === $authKey;
-    }
-
-    /**
-     * Validates password
-     *
-     * @param string $password password to validate
-     * @return bool if password provided is valid for current user
-     */
-    public function validatePassword($password)
-    {
-        return $this->password === $password;
     }
 
     /**
@@ -123,7 +49,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             [['birthdate', 'date_registered'], 'safe'],
             [['self_description'], 'string'],
             [['name'], 'string', 'max' => 100],
-            [['email'], 'string', 'max' => 50],
+            [['email'], 'string', 'max' => 319],
             [['password', 'photo'], 'string', 'max' => 255],
             [['phone'], 'string', 'max' => 11],
             [['telegram'], 'string', 'max' => 64],
@@ -192,7 +118,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
     public function getResponses()
     {
-        return $this->hasMany(Response::class, ['user_id' => 'id']);
+        return $this->hasMany(Response::class, ['user_id' => 'id'])->inverseOf('user');
     }
 
     /**
@@ -212,16 +138,30 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
     public function getTasks()
     {
+        if ($this->role_id === 1) {
+            return $this->hasMany(Task::class, ['customer_id' => 'id']);
+        }
+
         return $this->hasMany(Task::class, ['contractor_id' => 'id']);
     }
 
     /**
-     * Gets query for [[Tasks0]].
+     * Gets query for [[FailedTasks]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getTasks0()
+    public function getFailedTasks()
     {
-        return $this->hasMany(Task::class, ['customer_id' => 'id']);
+        return $this->getTasks()->where(['task_status_id' => 4]);
+    }
+
+    /**
+     * Gets query for [[FinishedTasks]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFinishedTasks()
+    {
+        return $this->getTasks()->where(['task_status_id' => 5]);
     }
 }

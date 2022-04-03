@@ -20,6 +20,7 @@ use Yii;
  * @property int|null $contractor_id
  * @property int|null $score
  * @property string|null $feedback
+ * @property string $date_updated
  * @property string $date_created
  * @property int $responsesCount
  *
@@ -52,7 +53,7 @@ class Task extends \yii\db\ActiveRecord
             [['overview', 'description', 'category_id', 'task_status_id', 'customer_id'], 'required'],
             [['description', 'coordinates', 'feedback'], 'string'],
             [['category_id', 'city_id', 'budget', 'task_status_id', 'customer_id', 'contractor_id', 'score'], 'integer'],
-            [['deadline', 'date_created'], 'safe'],
+            [['deadline', 'date_updated', 'date_created'], 'safe'],
             [['overview'], 'string', 'max' => 255],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::class, 'targetAttribute' => ['category_id' => 'id']],
             [['city_id'], 'exist', 'skipOnError' => true, 'targetClass' => City::class, 'targetAttribute' => ['city_id' => 'id']],
@@ -81,6 +82,7 @@ class Task extends \yii\db\ActiveRecord
             'contractor_id' => 'Contractor ID',
             'score' => 'Score',
             'feedback' => 'Feedback',
+            'date_updated' => 'Date Updated',
             'date_created' => 'Date Created',
         ];
     }
