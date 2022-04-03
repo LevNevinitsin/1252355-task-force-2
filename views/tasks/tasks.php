@@ -1,22 +1,29 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\StringHelper;
+use yii\helpers\Url;
 ?>
 
 <div class="left-column">
     <h3 class="head-main head-task">Новые задания</h3>
     <?php foreach ($newTasks as $newTask): ?>
     <div class="task-card">
+        <?php $taskUrl = Url::to(['/tasks/view', 'id' => $newTask->id]) ?>
         <div class="header-task">
-            <a  href="#" class="link link--block link--big"><?= $newTask->overview ?></a>
-            <p class="price price--task"><?= $newTask->budget ?> ₽</p>
+            <a  href="<?= $taskUrl ?>" class="link link--block link--big"><?= $newTask->overview ?></a>
+            <p class="price price--task">
+                <?= Yii::$app->formatter->asCurrency($newTask->budget, 'RUB', [NumberFormatter::MAX_FRACTION_DIGITS => 0]) ?>
+            </p>
         </div>
-        <p class="info-text"><span class="current-time">4 часа </span>назад</p>
+        <p class="info-text">
+            <?= StringHelper::mb_ucfirst(Yii::$app->formatter->asRelativeTime($newTask->date_created)) ?>
+        </p>
         <p class="task-text"><?= $newTask->description ?></p>
         <div class="footer-task">
             <p class="info-text town-text"><?= $newTask->city->name ?? 'Удалённая работа' ?></p>
             <p class="info-text category-text"><?= $newTask->category->name ?></p>
-            <a href="#" class="button button--black">Смотреть&nbsp;Задание</a>
+            <a href="<?= $taskUrl ?>" class="button button--black">Смотреть&nbsp;Задание</a>
         </div>
     </div>
     <?php endforeach ?>
