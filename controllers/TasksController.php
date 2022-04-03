@@ -6,6 +6,7 @@ use app\models\Category;
 use app\models\Task;
 
 use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 use LevNevinitsin\Business\Service\TaskService;
 
 class TasksController extends Controller
@@ -43,6 +44,21 @@ class TasksController extends Controller
             'shouldShowRemoteOnly'       => $shouldShowRemoteOnly,
             'shouldShowWithoutResponses' => $shouldShowWithoutResponses,
             'selectedPeriod'             => $selectedPeriod,
+        ]);
+    }
+
+    public function actionView($id)
+    {
+        $tasksIds = Task::find()->select(['id'])->column();
+
+        if (!$id || !in_array($id, $tasksIds)) {
+            throw new NotFoundHttpException();
+        }
+
+        $task = Task::findOne($id);
+
+        return $this->render('view-task', [
+            'task' => $task,
         ]);
     }
 }
