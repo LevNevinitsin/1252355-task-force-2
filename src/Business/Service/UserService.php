@@ -58,7 +58,7 @@ class UserService
         $scoresSum = $user->getFinishedTasks()->sum('score');
         $finishedTasksCount = $user->getFinishedTasks()->count();
         $failedTasksCount = $user->getFailedTasks()->count();
-        return $scoresSum / ($finishedTasksCount + $failedTasksCount);
+        return $scoresSum / (($finishedTasksCount + $failedTasksCount) ?: 1);
     }
 
     /**

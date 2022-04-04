@@ -21,7 +21,6 @@ MainAsset::register($this);
     <?php $this->head() ?>
 </head>
 
-
 <body>
 <?php $this->beginBody() ?>
 
@@ -30,6 +29,8 @@ MainAsset::register($this);
         <a href='#' class="header-logo">
             <img class="logo-image" src="/img/logotype.png" width=227 height=60 alt="taskforce">
         </a>
+        <?php $isRegistrationPage = Yii::$app->request->getUrl() === '/registration' ?>
+        <?php if (!$isRegistrationPage): ?>
         <div class="nav-wrapper">
             <ul class="nav-list">
                 <li class="list-item list-item--active">
@@ -46,7 +47,9 @@ MainAsset::register($this);
                 </li>
             </ul>
         </div>
+        <?php endif ?>
     </nav>
+    <?php if (!$isRegistrationPage): ?>
     <div class="user-block">
         <a href="#">
             <img class="user-photo" src="/img/man-glasses.png" width="55" height="55" alt="Аватар">
@@ -68,6 +71,7 @@ MainAsset::register($this);
             </div>
         </div>
     </div>
+    <?php endif ?>
 </header>
 
 <main class="main-content container">

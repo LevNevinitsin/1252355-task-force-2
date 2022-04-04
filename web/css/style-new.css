@@ -138,6 +138,14 @@
 
 /* --- User profile --- */
 
+.specialization-bio .specialization {
+  margin-right: 30px;
+}
+
+.specialization-bio .specialization .special-list {
+  margin-right: 0;
+}
+
 .response-card--user-profile {
   grid-template-columns: 120px 1fr auto;
 }
@@ -148,4 +156,25 @@
   padding: 0 15px;
 
   font-size: 16px;
+}
+
+/* --- Registration --- */
+
+.registration-form {
+  padding: 35px 40px;
+}
+
+.registration-form .control-label {
+  margin-bottom: 0;
+}
+
+.registration-form .button {
+  width: calc(100% - 27px * 2);
+  margin-bottom: 0;
+  padding: 10px 25px;
+}
+
+.registration-form .form-group .control-label input {
+  margin-top: 0;
+  margin-right: 5px;
 }
