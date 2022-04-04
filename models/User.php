@@ -11,6 +11,7 @@ use Yii;
  * @property string $name
  * @property string $email
  * @property string $password
+ * @property string $password_repeat
  * @property int $city_id
  * @property string|null $birthdate
  * @property string|null $photo
@@ -30,6 +31,8 @@ use Yii;
  */
 class User extends \yii\db\ActiveRecord
 {
+    public $password_repeat;
+
     /**
      * {@inheritdoc}
      */
@@ -49,11 +52,13 @@ class User extends \yii\db\ActiveRecord
             [['birthdate', 'date_registered'], 'safe'],
             [['self_description'], 'string'],
             [['name'], 'string', 'max' => 100],
-            [['email'], 'string', 'max' => 319],
-            [['password', 'photo'], 'string', 'max' => 255],
+            [['email'], 'email'],
+            [['email'], 'unique'],
+            [['password', 'password_repeat'], 'string', 'min' => 8],
+            ['password_repeat', 'compare', 'compareAttribute' => 'password'],
+            [['photo'], 'string', 'max' => 255],
             [['phone'], 'string', 'max' => 11],
             [['telegram'], 'string', 'max' => 64],
-            [['email'], 'unique'],
             [['city_id'], 'exist', 'skipOnError' => true, 'targetClass' => City::class, 'targetAttribute' => ['city_id' => 'id']],
             [['role_id'], 'exist', 'skipOnError' => true, 'targetClass' => Role::class, 'targetAttribute' => ['role_id' => 'id']],
         ];
@@ -66,10 +71,11 @@ class User extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => 'Ваше имя',
             'email' => 'Email',
-            'password' => 'Password',
-            'city_id' => 'City ID',
+            'password' => 'Пароль',
+            'password_repeat' => 'Повтор пароля',
+            'city_id' => 'Город',
             'birthdate' => 'Birthdate',
             'photo' => 'Photo',
             'phone' => 'Phone',
