@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
                 <?= $form->field($userModel, 'email')->textInput() ?>
                 <?= $form->field($userModel, 'city_id')->dropDownList($cities) ?>
             </div>
-            <?= $form->field($userModel, 'password', [])->passwordInput() ?>
+            <?= $form->field($userModel, 'password')->passwordInput() ?>
             <?= $form->field($userModel, 'password_repeat')->passwordInput() ?>
 
             <?= $form->field($userModel, 'role_id')->checkbox([
