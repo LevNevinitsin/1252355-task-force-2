@@ -21,4 +21,9 @@ class UsersController extends Controller
             'user' => $user,
         ]);
     }
+
+    public function actionLogout() {
+        \Yii::$app->user->logout();
+        return $this->goHome();
+    }
 }
