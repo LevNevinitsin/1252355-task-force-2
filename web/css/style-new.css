@@ -178,3 +178,12 @@
   margin-top: 0;
   margin-right: 5px;
 }
+
+/* --- Login form --- */
+.login-form .form-group {
+  margin-bottom: 35px;
+}
+
+.login-form .form-group .input-middle {
+  margin-bottom: 5px;
+}
