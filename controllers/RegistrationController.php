@@ -3,11 +3,34 @@ namespace app\controllers;
 
 use Yii;
 use yii\web\Controller;
+use yii\filters\AccessControl;
 use app\models\User;
 use app\models\City;
 
 class RegistrationController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'allow' => false,
+                        'roles' => ['@'],
+                        'denyCallback' => function ($rule, $action) {
+                            $this->redirect('/tasks');
+                        }
+                    ],
+                ],
+            ],
+        ];
+    }
+
     public function actionIndex()
     {
         $user = new User();

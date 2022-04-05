@@ -5,11 +5,10 @@ use Yii;
 use app\models\Category;
 use app\models\Task;
 
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use LevNevinitsin\Business\Service\TaskService;
 
-class TasksController extends Controller
+class TasksController extends SecuredController
 {
     public function actionIndex()
     {
