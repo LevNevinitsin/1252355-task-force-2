@@ -2,10 +2,9 @@
 namespace app\controllers;
 
 use app\models\User;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
-class UsersController extends Controller
+class UsersController extends SecuredController
 {
     public function actionView($id)
     {
@@ -20,5 +19,10 @@ class UsersController extends Controller
         return $this->render('user-profile', [
             'user' => $user,
         ]);
+    }
+
+    public function actionLogout() {
+        \Yii::$app->user->logout();
+        return $this->goHome();
     }
 }

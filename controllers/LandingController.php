@@ -3,12 +3,15 @@ namespace app\controllers;
 
 use Yii;
 use yii\web\Controller;
+use yii\web\Response;
 use yii\filters\AccessControl;
-use app\models\User;
-use app\models\City;
+use yii\widgets\ActiveForm;
+use app\models\LoginForm;
 
-class RegistrationController extends Controller
+class LandingController extends Controller
 {
+    public $layout = 'landing';
+
     public function behaviors()
     {
         return [
@@ -33,22 +36,23 @@ class RegistrationController extends Controller
 
     public function actionIndex()
     {
-        $user = new User();
-        $cities = City::find()->select(['name', 'id'])->indexBy('id')->column();
+        $loginForm = new LoginForm();
 
-        if (Yii::$app->request->getIsPost()) {
-            $user->load(Yii::$app->request->post());
+        if (\Yii::$app->request->getIsPost()) {
+            $loginForm->load(\Yii::$app->request->post());
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            $errors = ActiveForm::validate($loginForm);
 
-            if ($user->validate()) {
-                $user->password = Yii::$app->security->generatePasswordHash($user->password);
-                $user->save(false);
-                $this->goHome();
+            if ($errors) {
+                return $errors;
             }
+
+            $user = $loginForm->getUser();
+            \Yii::$app->user->login($user);
+            $this->redirect('/tasks');
         }
 
-        return $this->render('registration', [
-            'userModel' => $user,
-            'cities' => $cities,
-        ]);
+        $this->view->params['model'] = $loginForm;
+        return $this->render('index');
     }
 }

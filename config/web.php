@@ -9,6 +9,7 @@ $config = [
     'bootstrap' => ['log'],
     'language' => 'ru-RU',
     'timeZone' => 'Europe/Moscow',
+    'defaultRoute' => 'landing/index',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
@@ -24,6 +25,7 @@ $config = [
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
+            'loginUrl' => ['/'],
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
