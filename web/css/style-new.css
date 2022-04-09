@@ -110,6 +110,10 @@
   text-decoration-color: var(--white);
 }
 
+.file-card {
+  padding-bottom: 25px;
+}
+
 /* --- Absent avarars --- */
 
 .customer-photo--absent,
@@ -180,10 +184,65 @@
 }
 
 /* --- Login form --- */
+
 .login-form .form-group {
   margin-bottom: 35px;
 }
 
 .login-form .form-group .input-middle {
   margin-bottom: 5px;
+}
+
+/* --- Add task --- */
+
+.add-task-container {
+  width: 100%;
+}
+
+.add-task-container .add-task-form {
+  margin: 55px auto 0;
+}
+
+.add-task-container .add-task-form .form-group .control-label {
+  margin-bottom: 2px;
+}
+
+.add-task-container .add-task-form .half-wrapper .field-task-budget {
+  width: 42%;
+}
+
+.add-task-container .add-task-form .half-wrapper .form-group:first-child {
+  margin-right: 10px;
+}
+
+.add-task-container .add-task-form .half-wrapper input {
+  margin-right: 0;
+}
+
+.add-task-form .add-files-container {
+  margin-bottom: 5px;
+}
+
+.add-task-form .add-files-container .add-files-error {
+  visibility: visible;
+}
+
+.new-file {
+  width: revert;
+  height: revert;
+  margin: 0;
+  padding: 20px;
+}
+
+.new-file .add-file {
+  margin: revert;
+}
+
+.add-task-form .button {
+  margin-bottom: 0;
+  padding: 10px 25px;
+}
+
+.new-file.dropzone.dz-started {
+  background-image: none;
 }
