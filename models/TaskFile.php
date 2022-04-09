@@ -9,7 +9,8 @@ use Yii;
  *
  * @property int $id
  * @property int $task_id
- * @property string|null $path
+ * @property string $path
+ * @property string $original_name
  * @property string $date_created
  *
  * @property Task $task
@@ -30,10 +31,10 @@ class TaskFile extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['task_id'], 'required'],
+            [['task_id', 'path', 'original_name'], 'required'],
             [['task_id'], 'integer'],
             [['date_created'], 'safe'],
-            [['path'], 'string', 'max' => 255],
+            [['path', 'original_name'], 'string', 'max' => 255],
             [['task_id'], 'exist', 'skipOnError' => true, 'targetClass' => Task::class, 'targetAttribute' => ['task_id' => 'id']],
         ];
     }
@@ -47,6 +48,7 @@ class TaskFile extends \yii\db\ActiveRecord
             'id' => 'ID',
             'task_id' => 'Task ID',
             'path' => 'Path',
+            'original_name' => 'Original Name',
             'date_created' => 'Date Created',
         ];
     }
