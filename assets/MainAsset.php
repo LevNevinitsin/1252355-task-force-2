@@ -5,6 +5,10 @@ use yii\web\AssetBundle;
 
 class MainAsset extends AssetBundle
 {
+    public $depends = [
+        'app\assets\VendorAsset'
+    ];
+
     public $basePath = '@webroot';
 
     public $css = [
@@ -14,5 +18,6 @@ class MainAsset extends AssetBundle
 
     public $js = [
         'js/main.js',
+        'js/files-upload.js',
     ];
 }

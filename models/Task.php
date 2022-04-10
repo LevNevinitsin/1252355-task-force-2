@@ -12,7 +12,6 @@ use Yii;
  * @property string $description
  * @property int $category_id
  * @property int|null $city_id
- * @property string|null $coordinates
  * @property int|null $budget
  * @property string|null $deadline
  * @property int $task_status_id
@@ -35,6 +34,7 @@ use Yii;
 class Task extends \yii\db\ActiveRecord
 {
     public $responsesCount;
+    public $files;
 
     /**
      * {@inheritdoc}
@@ -51,15 +51,24 @@ class Task extends \yii\db\ActiveRecord
     {
         return [
             [['overview', 'description', 'category_id', 'task_status_id', 'customer_id'], 'required'],
-            [['description', 'coordinates', 'feedback'], 'string'],
-            [['category_id', 'city_id', 'budget', 'task_status_id', 'customer_id', 'contractor_id', 'score'], 'integer'],
-            [['deadline', 'date_updated', 'date_created'], 'safe'],
-            [['overview'], 'string', 'max' => 255],
+            [['overview'], 'string', 'min' => 10, 'max' => 255],
+            [['description'], 'string', 'min' => 30],
+            [['feedback'], 'string'],
+            [['category_id', 'city_id', 'task_status_id', 'customer_id', 'contractor_id', 'score'], 'integer'],
+            [['budget'], 'integer', 'min' => 1],
+            [['date_updated', 'date_created'], 'safe'],
+            [
+                ['deadline'],
+                'date',
+                'format' => 'php:Y-m-d',
+                'min' =>  Yii::$app->formatter->asDate(new \DateTime(), 'php:Y-m-d'),
+            ],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::class, 'targetAttribute' => ['category_id' => 'id']],
             [['city_id'], 'exist', 'skipOnError' => true, 'targetClass' => City::class, 'targetAttribute' => ['city_id' => 'id']],
             [['contractor_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['contractor_id' => 'id']],
             [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['customer_id' => 'id']],
             [['task_status_id'], 'exist', 'skipOnError' => true, 'targetClass' => TaskStatus::class, 'targetAttribute' => ['task_status_id' => 'id']],
+            [['files'], 'file', 'maxFiles' => 10],
         ];
     }
 
@@ -70,13 +79,12 @@ class Task extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'overview' => 'Overview',
-            'description' => 'Description',
-            'category_id' => 'Category ID',
-            'city_id' => 'City ID',
-            'coordinates' => 'Coordinates',
-            'budget' => 'Budget',
-            'deadline' => 'Deadline',
+            'overview' => 'Опишите суть работы',
+            'description' => 'Подробности задания',
+            'category_id' => 'Категория',
+            'city_id' => 'Локация',
+            'budget' => 'Бюджет',
+            'deadline' => 'Срок исполнения',
             'task_status_id' => 'Task Status ID',
             'customer_id' => 'Customer ID',
             'contractor_id' => 'Contractor ID',
@@ -84,6 +92,7 @@ class Task extends \yii\db\ActiveRecord
             'feedback' => 'Feedback',
             'date_updated' => 'Date Updated',
             'date_created' => 'Date Created',
+            'files' => 'Файлы',
         ];
     }
 

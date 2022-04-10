@@ -26,7 +26,7 @@ class m220331_101320_create_task_table extends Migration
             'category_id' => $this->integer()->notNull(),
             'city_id' => $this->integer(),
             'budget' => $this->integer(),
-            'deadline' => $this->datetime(),
+            'deadline' => $this->date(),
             'task_status_id' => $this->integer()->notNull(),
             'customer_id' => $this->integer()->notNull(),
             'contractor_id' => $this->integer(),
