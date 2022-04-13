@@ -50,11 +50,11 @@ class LoginForm extends Model
     }
 
     /**
-     * Gets user ActiveRecord by email address
+     * Gets User instance by email address
      *
-     * @return \app\models\User
+     * @return \app\models\User|null
      */
-    public function getUser(): \app\models\User
+    public function getUser(): ?\app\models\User
     {
         if ($this->_user === null) {
             $this->_user = User::findOne(['email' => $this->email]);
