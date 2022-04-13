@@ -83,7 +83,7 @@ class TasksController extends Controller
             $selectedPeriod
         );
 
-        $newTasks = $tasksQuery->all();
+        $newTasks = $tasksQuery->orderBy(['date_created' => SORT_DESC])->all();
         $categories = Category::find()->select(['name'])->orderBy(['id' => SORT_ASC])->indexBy('id')->column();
 
         return $this->render('tasks', [
