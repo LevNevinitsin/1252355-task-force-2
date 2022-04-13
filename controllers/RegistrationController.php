@@ -42,6 +42,12 @@ class RegistrationController extends Controller
             if ($user->validate()) {
                 $user->password = Yii::$app->security->generatePasswordHash($user->password);
                 $user->save(false);
+                $user->refresh();
+
+                $auth = Yii::$app->authManager;
+                $authorRole = $auth->getRole($user->role_id === 1 ? 'customer' : 'contractor');
+                $auth->assign($authorRole, $user->getId());
+
                 $this->goHome();
             }
         }

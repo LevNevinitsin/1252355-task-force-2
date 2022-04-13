@@ -30,10 +30,32 @@ class TasksController extends Controller
                     [
                         'allow' => true,
                         'actions' => ['add', 'upload-files'],
-                        'matchCallback' => function($rule, $action) {
-                            return Yii::$app->user->identity->role_id === 1;
-                        }
-                    ]
+                        'roles' => ['customer'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['decline'],
+                        'roles' => ['declineTask'],
+                        'roleParams' => function() {
+                            return ['task' => Task::findOne(['id' => Yii::$app->request->get('id')])];
+                        },
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['cancel'],
+                        'roles' => ['cancelOwnTask'],
+                        'roleParams' => function() {
+                            return ['task' => Task::findOne(['id' => Yii::$app->request->get('id')])];
+                        },
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['complete'],
+                        'roles' => ['completeOwnTask'],
+                        'roleParams' => function() {
+                            return ['task' => Task::findOne(['id' => Yii::$app->request->post('Task')['task_id']])];
+                        },
+                    ],
                 ],
             ],
         ];
