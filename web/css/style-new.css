@@ -3,6 +3,9 @@
   --light: #f8f8f8;
   --lightgrey: #bbbbbb;
   --grey: #888888;
+  --black: #000000;
+
+  --lightblue: #f2f0ff;
 }
 
 /* --- Tasks list --- */
@@ -245,4 +248,110 @@
 
 .new-file.dropzone.dz-started {
   background-image: none;
+}
+
+/* --- Modal windows --- */
+
+.pop-up {
+  padding: 20px;
+}
+
+.pop-up .pop-up__heading {
+  margin-bottom: 30px;
+  padding-right: 20px;
+}
+
+.pop-up .button--close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+
+  width: 40px;
+  height: 40px;
+  padding: 5px;
+
+  border: none;
+}
+
+.pop-up .button--close:active {
+  padding: 6px 5px 4px;
+}
+
+.pop-up .button--close::after {
+  position: static;
+
+  padding: 0;
+}
+
+.pop-up .pop-up--form {
+  width: 100%;
+}
+
+.pop-up--form textarea {
+  width: calc(100% - 9px * 2);
+  max-width: unset;
+}
+
+.pop-up--form .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+}
+
+.pop-up--form input, .pop-up--form textarea {
+  padding: 9px;
+  border-radius: 7px;
+  border: solid 2px #989898;
+}
+
+.form-group input[type="number"] {
+  width: 50%;
+}
+
+.pop-up .button {
+  margin-bottom: 0;
+  padding: 10px 25px;
+}
+
+.pop-up--form .rating-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.pop-up--form .stars-rating {
+  justify-content: flex-start;
+}
+
+.pop-up--form .rating-label {
+  margin: 0 0 5px 0;
+}
+
+.pop-up--form .stars-rating.big span::before {
+  height: 20px
+}
+
+.pop-up--completion .form-group:last-of-type .control-label {
+  line-height: 25px;
+}
+
+.stars-rating--interactive {
+  flex-direction: row-reverse;
+}
+
+.stars-rating--interactive .rating-item {
+  cursor: pointer;
+}
+
+.stars-rating--interactive .rating-item:hover,
+.stars-rating--interactive .rating-item:hover ~ .rating-item {
+  background-image: url("../img/star-fill.svg");
+}
+
+.stars-rating--interactive[data-total-value="1"] .rating-item:nth-child(n + 5),
+.stars-rating--interactive[data-total-value="2"] .rating-item:nth-child(n + 4),
+.stars-rating--interactive[data-total-value="3"] .rating-item:nth-child(n + 3),
+.stars-rating--interactive[data-total-value="4"] .rating-item:nth-child(n + 2),
+.stars-rating--interactive[data-total-value="5"] .rating-item:nth-child(n + 1) {
+  background-image: url("../img/star-fill.svg");
 }

@@ -1,6 +1,8 @@
 <?php
 namespace LevNevinitsin\Business\Action;
 
+use app\models\Task;
+
 class CancelAction extends Action
 {
     public function getName(): string
@@ -13,9 +15,9 @@ class CancelAction extends Action
         return 'Отменить';
     }
 
-    public function isUserAuthorized(int $userId, string $userRole, int $customerId, ?int $contractorId = null): bool
+    public function isUserAuthorized(int $userId, string $userRole, Task $task): bool
     {
-        if ($userId === $customerId) {
+        if ($userId === $task->customer_id) {
             return true;
         }
 

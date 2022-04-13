@@ -27,6 +27,9 @@ $config = [
             'enableAutoLogin' => true,
             'loginUrl' => ['/'],
         ],
+        'authManager' => [
+            'class' => 'yii\rbac\PhpManager',
+        ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
@@ -54,6 +57,8 @@ $config = [
             'rules' => [
                 'tasks/view/<id:\d+>' => 'tasks/view',
                 'users/view/<id:\d+>' => 'users/view',
+                'responses/decline/<id:\d+>' => 'responses/decline',
+                'responses/accept/<id:\d+>' => 'responses/accept',
             ],
         ],
         'formatter' => [

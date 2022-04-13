@@ -1,11 +1,13 @@
 <?php
 namespace LevNevinitsin\Business\Action;
 
-class StartAction extends Action
+use app\models\Task;
+
+class AcceptAction extends Action
 {
     public function getName(): string
     {
-        return 'Start';
+        return 'Accept';
     }
 
     public function getInternalTitle(): string
@@ -13,9 +15,9 @@ class StartAction extends Action
         return 'Принять';
     }
 
-    public function isUserAuthorized(int $userId, string $userRole, int $customerId, ?int $contractorId = null): bool
+    public function isUserAuthorized(int $userId, string $userRole, Task $task): bool
     {
-        if ($userId === $customerId) {
+        if ($userId === $task->customer_id) {
             return true;
         }
 

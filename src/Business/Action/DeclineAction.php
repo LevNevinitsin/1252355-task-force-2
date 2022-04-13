@@ -1,6 +1,8 @@
 <?php
 namespace LevNevinitsin\Business\Action;
 
+use app\models\Task;
+
 class DeclineAction extends Action
 {
     public function getName(): string
@@ -13,9 +15,9 @@ class DeclineAction extends Action
         return 'Отказаться';
     }
 
-    public function isUserAuthorized(int $userId, string $userRole, int $customerId, ?int $contractorId = null): bool
+    public function isUserAuthorized(int $userId, string $userRole, Task $task): bool
     {
-        if ($userId === $contractorId) {
+        if ($userId === $task->contractor_id) {
             return true;
         }
 

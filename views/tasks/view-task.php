@@ -2,6 +2,12 @@
 use yii\helpers\StringHelper;
 use yii\helpers\Url;
 use LevNevinitsin\Business\Service\UserService;
+use LevNevinitsin\Business\Service\TaskService;
+use LevNevinitsin\Business\Service\ResponseService;
+
+$currentUserId = Yii::$app->user->getId();
+$isUserTaskAuthor = $currentUserId === $task->customer_id;
+$relevantResponses = ResponseService::getRelevant($currentUserId, $task);
 ?>
 
 <div class="left-column">
@@ -12,58 +18,63 @@ use LevNevinitsin\Business\Service\UserService;
         </p>
     </div>
     <p class="task-description"><?= $task->description ?></p>
-    <a href="#" class="button button--blue">Откликнуться на задание</a>
+    <?= TaskService::getAvailableActionsMarkup($task) ?>
     <div class="task-map">
         <img class="map" src="/img/map.png"  width="725" height="346" alt="Новый арбат, 23, к. 1">
         <p class="map-address town">Москва</p>
         <p class="map-address">Новый арбат, 23, к. 1</p>
     </div>
-    <h4 class="head-regular">Отклики на задание</h4>
-    <?php if ($taskResponses = $task->responses): ?>
-        <?php foreach ($taskResponses as $response): ?>
-        <div class="response-card response-card--task">
-            <?php $responseUser = $response->user ?>
-            <?php if ($responseUserPhoto = $responseUser->photo): ?>
-            <img class="customer-photo" src="<?= $responseUserPhoto ?>" width="146" height="156" alt="Фото заказчика">
-            <?php else: ?>
-            <div class="customer-photo customer-photo--absent">Фото отсутствует</div>
-            <?php endif ?>
-            <div class="feedback-wrapper">
-                <a href="<?= Url::to(['/users/view', 'id' => $responseUser->id]) ?>" class="link link--block link--big"><?= $responseUser->name ?></a>
-                <div class="response-wrapper">
-                    <div class="stars-rating small">
-                        <?php for($i = 1; $i <= 5; $i++): ?>
-                            <?php if ($i <= round(UserService::getRating($responseUser))): ?>
-                            <span class="fill-star">&nbsp;</span>
-                            <?php else: ?>
-                            <span class="nofill-star">&nbsp;</span>
-                            <?php endif ?>
-                        <?php endfor ?>
+    <?php if ($relevantResponses !== null): ?>
+        <h4 class="head-regular">Отклики на задание</h4>
+        <?php if (count($relevantResponses)): ?>
+            <?php foreach ($relevantResponses as $response): ?>
+            <div class="response-card response-card--task">
+                <?php $responseUser = $response->user ?>
+                <?php if ($responseUserPhoto = $responseUser->photo): ?>
+                <img class="customer-photo" src="<?= $responseUserPhoto ?>" width="146" height="156" alt="Фото заказчика">
+                <?php else: ?>
+                <div class="customer-photo customer-photo--absent">Фото отсутствует</div>
+                <?php endif ?>
+                <div class="feedback-wrapper">
+                    <a href="<?= Url::to(['/users/view', 'id' => $responseUser->id]) ?>" class="link link--block link--big"><?= $responseUser->name ?></a>
+                    <div class="response-wrapper">
+                        <div class="stars-rating small">
+                            <?php $userRoundedRating = round(UserService::getRating($responseUser)) ?>
+                            <?php for($i = 1; $i <= 5; $i++): ?>
+                                <?php if ($i <= $userRoundedRating): ?>
+                                <span class="fill-star">&nbsp;</span>
+                                <?php else: ?>
+                                <span class="nofill-star">&nbsp;</span>
+                                <?php endif ?>
+                            <?php endfor ?>
+                        </div>
+                        <p class="reviews">
+                            <?= Yii::$app->i18n->messageFormatter->format(
+                                '{n, plural, =0{Отзывов пока нет} one{# отзыв} few{# отзыва} many{# отзывов} other{# отзывов}}',
+                                ['n' => UserService::getFinishedTasksCount($responseUser)],
+                                \Yii::$app->language
+                            )?>
+                        </p>
                     </div>
-                    <p class="reviews">
-                        <?= Yii::$app->i18n->messageFormatter->format(
-                            '{n, plural, =0{Отзывов нет} one{# отзыв} few{# отзыва} many{# отзывов} other{# отзывов}}',
-                            ['n' => count($responseUser->responses)],
-                            \Yii::$app->language
-                        )?>
+                    <p class="response-message"><?= $response->comment ?></p>
+                </div>
+                <div class="feedback-wrapper">
+                    <p class="info-text"><span class="current-time"><?= StringHelper::mb_ucfirst(Yii::$app->formatter->asRelativeTime($response->date_created)) ?></span></p>
+                    <p class="price price--small">
+                        <?= Yii::$app->formatter->asCurrency($response->price, 'RUB', [NumberFormatter::MAX_FRACTION_DIGITS => 0]) ?>
                     </p>
                 </div>
-                <p class="response-message"><?= $response->comment ?></p>
+                <?php if ($response->task->task_status_id === 1 && $isUserTaskAuthor && $response->is_declined === 0): ?>
+                <div class="button-popup">
+                    <a href="<?= Url::to(['responses/accept', 'id' => $response->id])?>" class="button button--blue button--small">Принять</a>
+                    <a href="<?= Url::to(['responses/decline', 'id' => $response->id])?>" class="button button--orange button--small">Отказать</a>
+                </div>
+                <?php endif ?>
             </div>
-            <div class="feedback-wrapper">
-                <p class="info-text"><span class="current-time"><?= StringHelper::mb_ucfirst(Yii::$app->formatter->asRelativeTime($response->date_created)) ?></span></p>
-                <p class="price price--small">
-                    <?= Yii::$app->formatter->asCurrency($response->price, 'RUB', [NumberFormatter::MAX_FRACTION_DIGITS => 0]) ?>
-                </p>
-            </div>
-            <div class="button-popup">
-                <a href="#" class="button button--blue button--small">Принять</a>
-                <a href="#" class="button button--orange button--small">Отказать</a>
-            </div>
-        </div>
-        <?php endforeach ?>
-    <?php else: ?>
-        Откликов пока нет.
+            <?php endforeach ?>
+        <?php else: ?>
+            Откликов пока нет.
+        <?php endif ?>
     <?php endif ?>
 </div>
 <div class="right-column">

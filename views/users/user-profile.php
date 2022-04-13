@@ -14,10 +14,13 @@ use LevNevinitsin\Business\Service\UserService;
             <div class="card-photo card-photo--absent">Фото отсутствует</div>
             <?php endif ?>
             <div class="card-rate">
-                <?php $userRating = UserService::getRating($user) ?>
+                <?php
+                    $userRating = UserService::getRating($user);
+                    $roundedUserRating = round($userRating);
+                 ?>
                 <div class="stars-rating big">
                     <?php for($i = 1; $i <= 5; $i++): ?>
-                        <?php if ($i <= round($userRating)): ?>
+                        <?php if ($i <= $roundedUserRating): ?>
                         <span class="fill-star">&nbsp;</span>
                         <?php else: ?>
                         <span>&nbsp;</span>
@@ -71,8 +74,9 @@ use LevNevinitsin\Business\Service\UserService;
         </div>
         <div class="feedback-wrapper">
             <div class="stars-rating small">
+                <?php $taskScore = $finishedTask->score ?>
                 <?php for($i = 1; $i <= 5; $i++): ?>
-                    <?php if ($i <= $finishedTask->score): ?>
+                    <?php if ($i <= $taskScore): ?>
                     <span class="fill-star">&nbsp;</span>
                     <?php else: ?>
                     <span class="nofill-star">&nbsp;</span>

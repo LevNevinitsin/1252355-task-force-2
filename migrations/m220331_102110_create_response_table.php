@@ -22,6 +22,7 @@ class m220331_102110_create_response_table extends Migration
             'user_id' => $this->integer()->notNull(),
             'price' => $this->integer(),
             'comment' => $this->text(),
+            'is_declined' => $this->tinyInteger()->notNull()->defaultValue(0),
             'date_created' => $this->datetime()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
         ]);
 

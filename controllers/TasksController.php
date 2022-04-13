@@ -4,6 +4,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Category;
 use app\models\Task;
+use app\models\Response as ResponseModel;
 use yii\web\Response;
 use yii\web\NotFoundHttpException;
 use yii\web\Controller;
@@ -30,10 +31,32 @@ class TasksController extends Controller
                     [
                         'allow' => true,
                         'actions' => ['add', 'upload-files'],
-                        'matchCallback' => function($rule, $action) {
-                            return Yii::$app->user->identity->role_id === 1;
-                        }
-                    ]
+                        'roles' => ['customer'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['decline'],
+                        'roles' => ['declineTask'],
+                        'roleParams' => function() {
+                            return ['task' => Task::findOne(['id' => Yii::$app->request->get('id')])];
+                        },
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['cancel'],
+                        'roles' => ['cancelOwnTask'],
+                        'roleParams' => function() {
+                            return ['task' => Task::findOne(['id' => Yii::$app->request->get('id')])];
+                        },
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['complete'],
+                        'roles' => ['completeOwnTask'],
+                        'roleParams' => function() {
+                            return ['task' => Task::findOne(['id' => Yii::$app->request->post('Task')['task_id']])];
+                        },
+                    ],
                 ],
             ],
         ];
@@ -60,7 +83,7 @@ class TasksController extends Controller
             $selectedPeriod
         );
 
-        $newTasks = $tasksQuery->all();
+        $newTasks = $tasksQuery->orderBy(['date_created' => SORT_DESC])->all();
         $categories = Category::find()->select(['name'])->orderBy(['id' => SORT_ASC])->indexBy('id')->column();
 
         return $this->render('tasks', [
@@ -84,6 +107,9 @@ class TasksController extends Controller
         }
 
         $task = Task::findOne($id);
+        $response = new ResponseModel();
+        $this->view->params['taskModel'] = $task;
+        $this->view->params['responseModel'] = $response;
 
         return $this->render('view-task', [
             'task' => $task,
@@ -139,5 +165,34 @@ class TasksController extends Controller
             'categories' => $categories,
             'areFilesValid' => $areFilesValid,
         ]);
+    }
+
+    public function actionCancel($id)
+    {
+        $task = Task::findOne($id);
+        $task->task_status_id = 2;
+        $task->date_updated = date("Y-m-d H:i:s");
+        $task->save();
+        $this->redirect("/tasks/view/$task->id");
+    }
+
+    public function actionDecline($id)
+    {
+        $task = Task::findOne($id);
+        $task->task_status_id = 4;
+        $task->date_updated = date("Y-m-d H:i:s");
+        $task->save();
+        $this->redirect("/tasks/view/$task->id");
+    }
+
+    public function actionComplete()
+    {
+        if (Yii::$app->request->getIsPost()) {
+            $task = Task::findOne(Yii::$app->request->post('Task')['task_id']);
+            $task->load(Yii::$app->request->post());
+            $task->date_updated = date("Y-m-d H:i:s");
+            $task->save();
+            $this->redirect("/tasks/view/$task->id");
+        }
     }
 }
