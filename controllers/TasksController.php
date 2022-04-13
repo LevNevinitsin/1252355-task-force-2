@@ -4,6 +4,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Category;
 use app\models\Task;
+use app\models\Response as ResponseModel;
 use yii\web\Response;
 use yii\web\NotFoundHttpException;
 use yii\web\Controller;
@@ -106,6 +107,9 @@ class TasksController extends Controller
         }
 
         $task = Task::findOne($id);
+        $response = new ResponseModel();
+        $this->view->params['taskModel'] = $task;
+        $this->view->params['responseModel'] = $response;
 
         return $this->render('view-task', [
             'task' => $task,

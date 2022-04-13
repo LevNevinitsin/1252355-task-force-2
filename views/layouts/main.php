@@ -7,6 +7,7 @@ use app\assets\AppAsset;
 use app\assets\MainAsset;
 use yii\bootstrap4\Html;
 use yii\helpers\Url;
+use yii\widgets\ActiveForm;
 
 AppAsset::register($this);
 MainAsset::register($this);
@@ -84,6 +85,84 @@ $userIdentity = Yii::$app->user->identity;
     <?= $content ?>
 </main>
 
+<?php
+$controller = Yii::$app->controller;
+$isTaskView = ($controller->id === 'tasks' && $controller->action->id === 'view');
+
+if ($isTaskView) {
+    $taskId = Yii::$app->request->get('id');
+}
+?>
+<?php if ($isTaskView): ?>
+<section class="pop-up pop-up--act_response">
+    <?= Html::button('', ['class' => 'button--close']) ?>
+    <h4 class="pop-up__heading">Добавить отклик</h2>
+    <?php $form = ActiveForm::begin([
+        'id' => 'add-response-form',
+        'action' => '/responses/add',
+        'method' => 'POST',
+        'options' => ['class' => 'pop-up--form'],
+        'fieldConfig' => [
+            'labelOptions' => ['class' => 'control-label'],
+        ],
+    ]) ?>
+        <?= $form->field($this->params['responseModel'], 'task_id')->hiddenInput(['value'=> $taskId])->label(false)->error(false) ?>
+        <?= $form->field($this->params['responseModel'], 'price')->textInput(['type' => 'number']) ?>
+        <?= $form->field($this->params['responseModel'], 'comment')->textarea() ?>
+
+        <?= HTML::submitButton('Опубликовать', ['class' => 'button button--blue']); ?>
+    <?php ActiveForm::end() ?>
+</section>
+
+<section class="pop-up pop-up--refusal">
+    <?= Html::button('', ['class' => 'button--close']) ?>
+    <h4 class="pop-up__heading">Отказаться от задания</h2>
+    <p class="pop-up-text">Вы уверены, что хотите отказаться от задания?</p>
+    <a class="button button--blue" href="<?= Url::to(['/tasks/decline', 'id' => $taskId]) ?>">Да</a>
+</section>
+
+<section class="pop-up pop-up--completion">
+    <?= Html::button('', ['class' => 'button--close']) ?>
+    <h4 class="pop-up__heading">Завершить задание</h2>
+    <?php $form = ActiveForm::begin([
+        'id' => 'complete-task-form',
+        'action' => '/tasks/complete',
+        'method' => 'POST',
+        'options' => ['class' => 'pop-up--form'],
+        'fieldConfig' => [
+            'labelOptions' => ['class' => 'control-label'],
+        ],
+    ]) ?>
+        <?= $form->field($this->params['taskModel'], 'task_id')->hiddenInput(['value'=> $taskId])->label(false)->error(false) ?>
+        <?= $form->field($this->params['taskModel'], 'task_status_id', ['inputOptions' => ['class' => 'task-status-id']])
+            ->hiddenInput(['value'=> 5])
+            ->label(false)
+            ->error(false)
+        ?>
+
+        <div class="rating-container">
+            <p class="rating-label">Оценка:</p>
+            <div class="stars-rating big stars-rating--interactive" data-total-value="">
+                <span class="nofill-star rating-item" data-item-value="5">&nbsp;</span>
+                <span class="nofill-star rating-item" data-item-value="4">&nbsp;</span>
+                <span class="nofill-star rating-item" data-item-value="3">&nbsp;</span>
+                <span class="nofill-star rating-item" data-item-value="2">&nbsp;</span>
+                <span class="nofill-star rating-item" data-item-value="1">&nbsp;</span>
+            </div>
+        </div>
+        <?= $form->field($this->params['taskModel'], 'score', ['inputOptions' => ['class' => 'rating-input']])
+            ->hiddenInput()
+            ->label(false)
+        ?>
+
+        <?= $form->field($this->params['taskModel'], 'feedback')->textarea() ?>
+
+        <?= HTML::submitButton('Завершить', ['class' => 'button button--blue']); ?>
+    <?php ActiveForm::end() ?>
+</section>
+<?php endif ?>
+
+<div class="overlay"></div>
 <?php $this->endBody() ?>
 </body>
 </html>
