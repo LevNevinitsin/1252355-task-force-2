@@ -1,9 +1,17 @@
 <?php
 namespace LevNevinitsin\Business\Service;
 
+use Yii;
+use yii\helpers\Url;
 use app\models\Response;
 use app\models\TaskFile;
-use Yii;
+use app\models\User;
+use app\models\Task;
+use LevNevinitsin\Business\Action\CancelAction;
+use LevNevinitsin\Business\Action\RespondAction;
+use LevNevinitsin\Business\Action\AcceptAction;
+use LevNevinitsin\Business\Action\DeclineAction;
+use LevNevinitsin\Business\Action\CompleteAction;
 
 class TaskService
 {
@@ -86,5 +94,72 @@ class TaskService
             $file->original_name = $uploadedFile['originalName'];
             $file->save(false);
         }
+    }
+
+    /**
+     * Gets available actions for specific task and current user
+     *
+     * @param Task $task The task
+     * @return array Available actions
+     */
+    public static function getAvailableActions(Task $task): array
+    {
+        $actionCancel   = new CancelAction();
+        $actionRespond  = new RespondAction();
+        $actionAccept   = new AcceptAction();
+        $actionDecline  = new DeclineAction();
+        $actionComplete = new CompleteAction();
+
+        $statusNewId = 1;
+        $statusInWorkId = 3;
+
+        $actionsMap = [
+            $statusNewId => [
+                $actionCancel,
+                $actionRespond,
+                $actionAccept,
+            ],
+            $statusInWorkId => [
+                $actionDecline,
+                $actionComplete,
+            ],
+        ];
+
+        $availableActions = $actionsMap[$task->task_status_id] ?? [];
+        $userId = Yii::$app->user->getId();
+        $userRole = User::findOne($userId)->role->name;
+
+        $availableActions = array_filter($availableActions, function ($action) use ($userId, $userRole, $task) {
+            return $action->isUserAuthorized($userId, $userRole, $task);
+        });
+
+        return $availableActions;
+    }
+
+    /**
+     * Gets markup for available actions for specific task and current user
+     *
+     * @param Task $task Specific The task
+     * @return string Resulting markup
+     */
+    public static function getAvailableActionsMarkup(Task $task): string
+    {
+        $cancelUrl = Url::to(['tasks/cancel', 'id' => $task->id]);
+
+        $actionsMarkupMap = [
+            'Cancel' => "<a class='button button--blue' href='$cancelUrl'>Отменить задание</a>",
+            'Respond' => '<button class="button button--blue action-btn" data-action="act_response" type="button">Откликнуться на задание</button>',
+            'Decline' => '<button class="button button--blue action-btn" data-action="refusal" type="button">Отказаться от задания</button>',
+            'Complete' => '<button class="button button--blue action-btn" data-action="completion" type="button">Завершить задание</button>',
+        ];
+
+        $markup = '';
+        $actionsNames = array_map(function ($action) { return $action->getName(); }, self::getAvailableActions($task));
+
+        foreach ($actionsNames as $actionName) {
+            $markup .= $actionsMarkupMap[$actionName] ?? '';
+        }
+
+        return $markup;
     }
 }
