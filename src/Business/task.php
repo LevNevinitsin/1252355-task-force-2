@@ -4,7 +4,7 @@ namespace LevNevinitsin\Business;
 use LevNevinitsin\Business\Action\Action;
 use LevNevinitsin\Business\Action\CancelAction;
 use LevNevinitsin\Business\Action\RespondAction;
-use LevNevinitsin\Business\Action\StartAction;
+use LevNevinitsin\Business\Action\AcceptAction;
 use LevNevinitsin\Business\Action\DeclineAction;
 use LevNevinitsin\Business\Action\CompleteAction;
 use LevNevinitsin\Business\Exception\TaskException;
@@ -59,7 +59,7 @@ class Task
 
         $this->actionCancel   = new CancelAction();
         $this->actionRespond  = new RespondAction();
-        $this->actionStart    = new StartAction();
+        $this->actionStart    = new AcceptAction();
         $this->actionDecline  = new DeclineAction();
         $this->actionComplete = new CompleteAction();
 

@@ -1,6 +1,8 @@
 <?php
 namespace LevNevinitsin\Business\Action;
 
+use app\models\Task;
+
 class CompleteAction extends Action
 {
     public function getName(): string
@@ -13,9 +15,9 @@ class CompleteAction extends Action
         return 'Завершить';
     }
 
-    public function isUserAuthorized(int $userId, string $userRole, int $customerId, ?int $contractorId = null): bool
+    public function isUserAuthorized(int $userId, string $userRole, Task $task): bool
     {
-        if ($userId === $customerId) {
+        if ($userId === $task->customer_id) {
             return true;
         }
 

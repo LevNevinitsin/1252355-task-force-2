@@ -1,6 +1,9 @@
 <?php
 namespace LevNevinitsin\Business\Action;
 
+use app\models\Response;
+use app\models\Task;
+
 class RespondAction extends Action
 {
     public function getName(): string
@@ -13,9 +16,11 @@ class RespondAction extends Action
         return 'Откликнуться';
     }
 
-    public function isUserAuthorized(int $userId, string $userRole, int $customerId, ?int $contractorId = null): bool
+    public function isUserAuthorized(int $userId, string $userRole, Task $task): bool
     {
-        if ($userRole === 'contractor') {
+        $hadResponded = Response::find()->where(['task_id' => $task->id, 'user_id' => $userId])->exists();
+
+        if ($userRole === 'contractor' && !$hadResponded) {
             return true;
         }
 
