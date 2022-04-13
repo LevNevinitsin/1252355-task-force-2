@@ -19,5 +19,6 @@ class MainAsset extends AssetBundle
     public $js = [
         'js/main.js',
         'js/files-upload.js',
+        'js/star-rating.js',
     ];
 }
