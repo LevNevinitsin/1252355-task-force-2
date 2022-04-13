@@ -12,6 +12,7 @@ use Yii;
  * @property int $user_id
  * @property int|null $price
  * @property string|null $comment
+ * @property int $is_declined
  * @property string $date_created
  *
  * @property Task $task
@@ -35,8 +36,10 @@ class Response extends \yii\db\ActiveRecord
         return [
             [['task_id', 'user_id'], 'required'],
             [['task_id', 'user_id', 'price'], 'integer'],
+            [['task_id', 'user_id'], 'unique', 'targetAttribute' => ['task_id', 'user_id']],
             [['comment'], 'string'],
             [['date_created'], 'safe'],
+            ['is_declined', 'boolean'],
             [['task_id'], 'exist', 'skipOnError' => true, 'targetClass' => Task::class, 'targetAttribute' => ['task_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
@@ -51,8 +54,8 @@ class Response extends \yii\db\ActiveRecord
             'id' => 'ID',
             'task_id' => 'Task ID',
             'user_id' => 'User ID',
-            'price' => 'Price',
-            'comment' => 'Comment',
+            'price' => 'Стоимость',
+            'comment' => 'Комментарий',
             'date_created' => 'Date Created',
         ];
     }

@@ -51,18 +51,34 @@ class Task extends \yii\db\ActiveRecord
     {
         return [
             [['overview', 'description', 'category_id', 'task_status_id', 'customer_id'], 'required'],
+
+            ['score', 'required', 'when' => function($model) {
+                return (int) $model->task_status_id === 5;
+            }, 'whenClient' => "function (attribute, value) {
+                return $('.pop-up--completion').hasClass('pop-up--open');
+            }", 'message' => 'Необходимо поставить оценку.'],
+
+            ['feedback', 'required', 'when' => function($model) {
+                return (int) $model->task_status_id === 5;
+            }, 'whenClient' => "function (attribute, value) {
+                return $('.pop-up--completion').hasClass('pop-up--open');
+            }", 'message' => 'Необходимо написать отзыв.'],
+
             [['overview'], 'string', 'min' => 10, 'max' => 255],
             [['description'], 'string', 'min' => 30],
             [['feedback'], 'string'],
             [['category_id', 'city_id', 'task_status_id', 'customer_id', 'contractor_id', 'score'], 'integer'],
             [['budget'], 'integer', 'min' => 1],
             [['date_updated', 'date_created'], 'safe'],
+
             [
                 ['deadline'],
                 'date',
                 'format' => 'php:Y-m-d',
                 'min' =>  Yii::$app->formatter->asDate(new \DateTime(), 'php:Y-m-d'),
+                'when' => function($model) { return (int) $model->task_status_id === 1; },
             ],
+
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::class, 'targetAttribute' => ['category_id' => 'id']],
             [['city_id'], 'exist', 'skipOnError' => true, 'targetClass' => City::class, 'targetAttribute' => ['city_id' => 'id']],
             [['contractor_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['contractor_id' => 'id']],
@@ -88,8 +104,8 @@ class Task extends \yii\db\ActiveRecord
             'task_status_id' => 'Task Status ID',
             'customer_id' => 'Customer ID',
             'contractor_id' => 'Contractor ID',
-            'score' => 'Score',
-            'feedback' => 'Feedback',
+            'score' => 'Оценка',
+            'feedback' => 'Отзыв',
             'date_updated' => 'Date Updated',
             'date_created' => 'Date Created',
             'files' => 'Файлы',
