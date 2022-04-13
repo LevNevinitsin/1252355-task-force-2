@@ -162,4 +162,33 @@ class TasksController extends Controller
             'areFilesValid' => $areFilesValid,
         ]);
     }
+
+    public function actionCancel($id)
+    {
+        $task = Task::findOne($id);
+        $task->task_status_id = 2;
+        $task->date_updated = date("Y-m-d H:i:s");
+        $task->save();
+        $this->redirect("/tasks/view/$task->id");
+    }
+
+    public function actionDecline($id)
+    {
+        $task = Task::findOne($id);
+        $task->task_status_id = 4;
+        $task->date_updated = date("Y-m-d H:i:s");
+        $task->save();
+        $this->redirect("/tasks/view/$task->id");
+    }
+
+    public function actionComplete()
+    {
+        if (Yii::$app->request->getIsPost()) {
+            $task = Task::findOne(Yii::$app->request->post('Task')['task_id']);
+            $task->load(Yii::$app->request->post());
+            $task->date_updated = date("Y-m-d H:i:s");
+            $task->save();
+            $this->redirect("/tasks/view/$task->id");
+        }
+    }
 }
