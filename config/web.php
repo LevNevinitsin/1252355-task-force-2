@@ -27,6 +27,9 @@ $config = [
             'enableAutoLogin' => true,
             'loginUrl' => ['/'],
         ],
+        'authManager' => [
+            'class' => 'yii\rbac\PhpManager',
+        ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
