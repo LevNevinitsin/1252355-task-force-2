@@ -13,7 +13,10 @@ use yii\web\Controller;
 use yii\web\UploadedFile;
 use yii\filters\AccessControl;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use GuzzleHttp\Client;
 use LevNevinitsin\Business\Service\TaskService;
+use LevNevinitsin\Business\Service\LocationService;
 
 class TasksController extends Controller
 {
@@ -102,19 +105,44 @@ class TasksController extends Controller
 
     public function actionView($id)
     {
-        $tasksIds = Task::find()->select(['id'])->column();
-
-        if (!$id || !in_array($id, $tasksIds)) {
+        if (!$id || !$task = Task::findOne($id)) {
             throw new NotFoundHttpException();
         }
 
-        $task = Task::findOne($id);
+        $geocoderApiKey = 'e666f398-c983-4bde-8f14-e3fec900592a';
+        $geocoderApiUri = 'https://geocode-maps.yandex.ru/';
+
+        $client = new Client([
+            'base_uri' => $geocoderApiUri,
+        ]);
+
+        try {
+            $response = $client->request('GET', '1.x', [
+                'query' => [
+                    'geocode' => "$task->longitude, $task->latitude",
+                    'apikey' => $geocoderApiKey,
+                    'format' => 'json',
+                 ],
+            ]);
+
+            $content = $response->getBody()->getContents();
+            $responseData = json_decode($content, true);
+            $geoObject = ArrayHelper::getValue($responseData, 'response.GeoObjectCollection.featureMember.0.GeoObject');
+            $cityName = LocationService::getCity($geoObject);
+            $address = ArrayHelper::getValue($geoObject, 'name');
+        } catch (\Exception $e) {
+            $cityName = $task->city->name;
+            $address = $task->location;
+        }
+
         $response = new ResponseModel();
         $this->view->params['taskModel'] = $task;
         $this->view->params['responseModel'] = $response;
 
         return $this->render('view-task', [
             'task' => $task,
+            'cityName' => $cityName,
+            'address' => $address,
         ]);
     }
 
