@@ -59,6 +59,7 @@ $config = [
                 'users/view/<id:\d+>' => 'users/view',
                 'responses/decline/<id:\d+>' => 'responses/decline',
                 'responses/accept/<id:\d+>' => 'responses/accept',
+                'location/geocode/<location:.+>/<userCityName:.+>/<userCityCoordinates:.+>' => 'location/geocode',
             ],
         ],
         'formatter' => [

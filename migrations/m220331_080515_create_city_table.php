@@ -15,9 +15,15 @@ class m220331_080515_create_city_table extends Migration
         $this->createTable('{{%city}}', [
             'id' => $this->primaryKey(),
             'name' => $this->string(50)->notNull(),
-            'latitude' => $this->decimal(10, 8)->notNull(),
-            'longitude' => $this->decimal(11, 8)->notNull(),
+            'latitude' => $this->decimal(9, 6)->notNull(),
+            'longitude' => $this->decimal(10, 6)->notNull(),
         ]);
+
+        $this->createIndex(
+            '{{%idx-city-name}}',
+            '{{%city}}',
+            'name'
+        );
 
         $this->batchInsert('city', ['name', 'latitude', 'longitude'], [
             ['Абаза', 52.6517296, 90.0885929],
@@ -1116,6 +1122,12 @@ class m220331_080515_create_city_table extends Migration
     public function safeDown()
     {
         $this->delete('city');
+
+        $this->dropIndex(
+            '{{%idx-city-name}}',
+            '{{%city}}'
+        );
+
         $this->dropTable('{{%city}}');
     }
 }

@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\StringHelper;
 use yii\helpers\Url;
+use yii\helpers\Html;
 use LevNevinitsin\Business\Service\UserService;
 use LevNevinitsin\Business\Service\TaskService;
 use LevNevinitsin\Business\Service\ResponseService;
@@ -19,11 +20,20 @@ $relevantResponses = ResponseService::getRelevant($currentUserId, $task);
     </div>
     <p class="task-description"><?= $task->description ?></p>
     <?= TaskService::getAvailableActionsMarkup($task) ?>
-    <div class="task-map">
-        <img class="map" src="/img/map.png"  width="725" height="346" alt="Новый арбат, 23, к. 1">
-        <p class="map-address town">Москва</p>
-        <p class="map-address">Новый арбат, 23, к. 1</p>
-    </div>
+    <?php if ($taskLocation = $task->location): ?>
+        <?php
+        $this->registerJsFile(
+            'https://api-maps.yandex.ru/2.1/?apikey=e666f398-c983-4bde-8f14-e3fec900592a&lang=ru_RU',
+            ['position' => $this::POS_HEAD]
+        );
+        $this->registerJsFile('/js/map.js');
+        ?>
+        <div class="task-map">
+            <div id="map" data-latitude="<?= $task->latitude ?>" data-longitude="<?= $task->longitude ?>"></div>
+            <p class="map-address town"><?= Html::encode($cityName) ?></p>
+            <p class="map-address"><?= Html::encode($address) ?></p>
+        </div>
+    <?php endif ?>
     <?php if ($relevantResponses !== null): ?>
         <h4 class="head-regular">Отклики на задание</h4>
         <?php if (count($relevantResponses)): ?>

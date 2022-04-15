@@ -4,6 +4,8 @@ namespace app\controllers;
 use Yii;
 use app\models\Category;
 use app\models\Task;
+use app\models\User;
+use app\models\City;
 use app\models\Response as ResponseModel;
 use yii\web\Response;
 use yii\web\NotFoundHttpException;
@@ -11,7 +13,10 @@ use yii\web\Controller;
 use yii\web\UploadedFile;
 use yii\filters\AccessControl;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use GuzzleHttp\Client;
 use LevNevinitsin\Business\Service\TaskService;
+use LevNevinitsin\Business\Service\LocationService;
 
 class TasksController extends Controller
 {
@@ -100,19 +105,44 @@ class TasksController extends Controller
 
     public function actionView($id)
     {
-        $tasksIds = Task::find()->select(['id'])->column();
-
-        if (!$id || !in_array($id, $tasksIds)) {
+        if (!$id || !$task = Task::findOne($id)) {
             throw new NotFoundHttpException();
         }
 
-        $task = Task::findOne($id);
+        $geocoderApiKey = 'e666f398-c983-4bde-8f14-e3fec900592a';
+        $geocoderApiUri = 'https://geocode-maps.yandex.ru/';
+
+        $client = new Client([
+            'base_uri' => $geocoderApiUri,
+        ]);
+
+        try {
+            $response = $client->request('GET', '1.x', [
+                'query' => [
+                    'geocode' => "$task->longitude, $task->latitude",
+                    'apikey' => $geocoderApiKey,
+                    'format' => 'json',
+                 ],
+            ]);
+
+            $content = $response->getBody()->getContents();
+            $responseData = json_decode($content, true);
+            $geoObject = ArrayHelper::getValue($responseData, 'response.GeoObjectCollection.featureMember.0.GeoObject');
+            $cityName = LocationService::getCity($geoObject);
+            $address = ArrayHelper::getValue($geoObject, 'name');
+        } catch (\Exception $e) {
+            $cityName = $task->city->name;
+            $address = $task->location;
+        }
+
         $response = new ResponseModel();
         $this->view->params['taskModel'] = $task;
         $this->view->params['responseModel'] = $response;
 
         return $this->render('view-task', [
             'task' => $task,
+            'cityName' => $cityName,
+            'address' => $address,
         ]);
     }
 
@@ -134,6 +164,7 @@ class TasksController extends Controller
         $categories = Category::find()->select(['name'])->orderBy(['id' => SORT_ASC])->indexBy('id')->column();
         $filesData = Yii::$app->session->get('filesData');
         $areFilesValid = $filesData !== self::INVALID_FILES_DATA;
+        $userCity = User::findOne(Yii::$app->user->getId())->city;
 
         if (Yii::$app->request->getIsPost()) {
             $task->load(Yii::$app->request->post());
@@ -146,6 +177,10 @@ class TasksController extends Controller
             }
 
             if ($task->validate() && ($filesData === null || $areFilesValid)) {
+                if ($taskCityName = $task->cityName) {
+                    $task->city_id = City::findOne(['name' => $taskCityName])->id;
+                }
+
                 $task->save(false);
                 $task->refresh();
                 $taskId = $task->id;
@@ -164,6 +199,7 @@ class TasksController extends Controller
             'model' => $task,
             'categories' => $categories,
             'areFilesValid' => $areFilesValid,
+            'userCity' => $userCity,
         ]);
     }
 

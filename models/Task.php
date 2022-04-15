@@ -11,7 +11,11 @@ use Yii;
  * @property string $overview
  * @property string $description
  * @property int $category_id
+ * @property string|null $location
+ * @property float|null $latitude
+ * @property float|null $longitude
  * @property int|null $city_id
+ * @property string|null $cityName
  * @property int|null $budget
  * @property string|null $deadline
  * @property int $task_status_id
@@ -35,6 +39,7 @@ class Task extends \yii\db\ActiveRecord
 {
     public $responsesCount;
     public $files;
+    public $cityName;
 
     /**
      * {@inheritdoc}
@@ -68,6 +73,8 @@ class Task extends \yii\db\ActiveRecord
             [['description'], 'string', 'min' => 30],
             [['feedback'], 'string'],
             [['category_id', 'city_id', 'task_status_id', 'customer_id', 'contractor_id', 'score'], 'integer'],
+            [['location'], 'string', 'max' => 255],
+            [['latitude', 'longitude'], 'number'],
             [['budget'], 'integer', 'min' => 1],
             [['date_updated', 'date_created'], 'safe'],
 
@@ -78,6 +85,9 @@ class Task extends \yii\db\ActiveRecord
                 'min' =>  Yii::$app->formatter->asDate(new \DateTime(), 'php:Y-m-d'),
                 'when' => function($model) { return (int) $model->task_status_id === 1; },
             ],
+
+            [['cityName'], 'string'],
+            [['cityName'], 'exist', 'skipOnError' => true, 'targetClass' => City::class, 'targetAttribute' => ['cityName' => 'name']],
 
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::class, 'targetAttribute' => ['category_id' => 'id']],
             [['city_id'], 'exist', 'skipOnError' => true, 'targetClass' => City::class, 'targetAttribute' => ['city_id' => 'id']],
@@ -98,6 +108,9 @@ class Task extends \yii\db\ActiveRecord
             'overview' => 'Опишите суть работы',
             'description' => 'Подробности задания',
             'category_id' => 'Категория',
+            'location' => 'Локация',
+            'latitude' => 'Широта',
+            'longitude' => 'Долгота',
             'city_id' => 'Локация',
             'budget' => 'Бюджет',
             'deadline' => 'Срок исполнения',
