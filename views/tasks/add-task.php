@@ -1,6 +1,9 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+$this->registerCssFile('/css/autocomplete-js/autoComplete.02.css');
+$this->registerJsFile('/js/autoComplete.min.js');
+$this->registerJsFile('/js/location-autocomplete.js');
 ?>
 <div class="add-task-container">
     <div class="add-task-form regular-form">
@@ -9,6 +12,19 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'overview')->textInput() ?>
             <?= $form->field($model, 'description')->textarea() ?>
             <?= $form->field($model, 'category_id')->dropDownList($categories) ?>
+
+            <?= $form->field($model, 'location', ['inputOptions' => [
+                'data-library' => 'autoComplete',
+                'data-user-city-name' => $userCity->name,
+                'data-user-city-coordinates' => $userCity->longitude . ', ' . $userCity->latitude,
+            ]])->textInput() ?>
+
+            <?= $form->field($model, 'latitude', ['inputOptions' => ['class' => 'js-latitude']])
+                ->hiddenInput()->label(false)->error(false) ?>
+            <?= $form->field($model, 'longitude', ['inputOptions' => ['class' => 'js-longitude']])
+                ->hiddenInput()->label(false)->error(false) ?>
+            <?= $form->field($model, 'cityName', ['inputOptions' => ['class' => 'js-cityName']])
+                ->hiddenInput()->label(false)->error(false) ?>
 
             <div class="form-group">
                 <label class="control-label" for="location">Локация</label>
@@ -37,4 +53,5 @@ use yii\widgets\ActiveForm;
         <?php $form = ActiveForm::end() ?>
     </div>
 </div>
+
 

@@ -4,6 +4,8 @@ namespace app\controllers;
 use Yii;
 use app\models\Category;
 use app\models\Task;
+use app\models\User;
+use app\models\City;
 use app\models\Response as ResponseModel;
 use yii\web\Response;
 use yii\web\NotFoundHttpException;
@@ -134,6 +136,7 @@ class TasksController extends Controller
         $categories = Category::find()->select(['name'])->orderBy(['id' => SORT_ASC])->indexBy('id')->column();
         $filesData = Yii::$app->session->get('filesData');
         $areFilesValid = $filesData !== self::INVALID_FILES_DATA;
+        $userCity = User::findOne(Yii::$app->user->getId())->city;
 
         if (Yii::$app->request->getIsPost()) {
             $task->load(Yii::$app->request->post());
@@ -146,6 +149,10 @@ class TasksController extends Controller
             }
 
             if ($task->validate() && ($filesData === null || $areFilesValid)) {
+                if ($taskCityName = $task->cityName) {
+                    $task->city_id = City::findOne(['name' => $taskCityName])->id;
+                }
+
                 $task->save(false);
                 $task->refresh();
                 $taskId = $task->id;
@@ -164,6 +171,7 @@ class TasksController extends Controller
             'model' => $task,
             'categories' => $categories,
             'areFilesValid' => $areFilesValid,
+            'userCity' => $userCity,
         ]);
     }
 
