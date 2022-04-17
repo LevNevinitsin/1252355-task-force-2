@@ -67,6 +67,18 @@ $config = [
             'defaultTimeZone' => 'Europe/Moscow',
             'nullDisplay' => '',
             'decimalSeparator' => '.',
+        ],
+        'authClientCollection' => [
+            'class' => 'yii\authclient\Collection',
+            'clients' => [
+                'vkontakte' => [
+                    'class' => 'yii\authclient\clients\VKontakte',
+                    'clientId' => 8138925,
+                    'clientSecret' => 'bJXBUMBmNAxSlnSyvLyR',
+                    'scope' => 'photos, email',
+                    'title' => 'VK',
+                ],
+            ],
         ]
     ],
     'params' => $params,

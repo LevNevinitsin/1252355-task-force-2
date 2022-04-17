@@ -201,4 +201,14 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return $this->getTasks()->where(['task_status_id' => 5]);
     }
+
+    /**
+     * Gets query for [[Auths]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+   public function getAuths()
+   {
+       return $this->hasMany(Auth::class, ['user_id' => 'id'])->inverseOf('auth');
+   }
 }
