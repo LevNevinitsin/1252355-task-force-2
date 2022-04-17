@@ -59,7 +59,10 @@ $userIdentity = Yii::$app->user->identity;
     <?php if (!$isRegistrationPage): ?>
     <div class="user-block">
         <a href="#">
-            <img class="user-photo" src="/img/man-glasses.png" width="55" height="55" alt="Аватар">
+            <?= Yii::$app->formatter->asImage(
+                $userIdentity->photo,
+                ['class' => 'user-photo', 'width' => 55, 'height' => 55, 'alt' => 'Аватар']
+            ) ?>
         </a>
         <div class="user-menu">
             <p class="user-name"><?= $userIdentity->name ?></p>
