@@ -6,6 +6,7 @@ use yii\web\Controller;
 use yii\filters\AccessControl;
 use app\models\User;
 use app\models\City;
+use LevNevinitsin\Business\Service\UserService;
 
 class RegistrationController extends Controller
 {
@@ -43,11 +44,7 @@ class RegistrationController extends Controller
                 $user->password = Yii::$app->security->generatePasswordHash($user->password);
                 $user->save(false);
                 $user->refresh();
-
-                $auth = Yii::$app->authManager;
-                $authorRole = $auth->getRole($user->role_id === 1 ? 'customer' : 'contractor');
-                $auth->assign($authorRole, $user->getId());
-
+                UserService::assignRbacRole($user);
                 $this->goHome();
             }
         }
