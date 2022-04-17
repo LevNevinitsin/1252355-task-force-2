@@ -29,6 +29,10 @@ phpunit.phar
 tests/_output/*
 tests/_support/_generated
 
+rbac/assignments.php
+rbac/items.php
+rbac/rules.php
+
 #vagrant folder
 /.vagrant
 

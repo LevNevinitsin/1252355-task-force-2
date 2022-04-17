@@ -7,6 +7,7 @@ use app\assets\AppAsset;
 use app\assets\LandingAsset;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
+use yii\authclient\widgets\AuthChoice;
 
 AppAsset::register($this);
 LandingAsset::register($this);
@@ -24,7 +25,7 @@ LandingAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="table-layout">
-    <header class=" page-header--index">
+    <header class="page-header--index">
         <div class="main-container page-header__container page-header__container--index">
             <div class="page-header__logo--index">
                 <a>
@@ -62,6 +63,9 @@ LandingAsset::register($this);
                 <a href="/registration" class="header__account-registration">
                     Регистрация
                 </a>
+                <?php if ($authError = Yii::$app->getSession()->getFlash('authError')): ?>
+                <div class="auth-error"><?= Html::encode($authError) ?></div>
+                <?php endif ?>
             </div>
         </div>
     </header>
@@ -201,7 +205,7 @@ LandingAsset::register($this);
             </div>
         </div>
     </footer>
-    <section class="modal enter-form form-modal" id="enter-form">
+    <section class="modal enter-form form-modal form-modal--login" id="enter-form">
     <h2>Вход на сайт</h2>
     <?php $form = ActiveForm::begin([
         'id' => 'login-form',
@@ -221,6 +225,43 @@ LandingAsset::register($this);
         <?= Html::submitButton('Войти', ['class' => 'button']); ?>
     <?php ActiveForm::end() ?>
     <button class="form-modal-close" type="button">Закрыть</button>
+    <?php $authAuthChoice = AuthChoice::begin([
+        'baseAuthUrl' => ['external-auth/customer-auth'],
+        'popupMode' => true,
+        'options' => ['class' => 'auth-container'],
+    ]); ?>
+    <ul class="auth-list">
+    <?php foreach ($authAuthChoice->getClients() as $client): ?>
+        <?php $clientTitle = $client->getTitle() ?>
+        <li>
+            <?= $authAuthChoice->clientLink(
+                $client,
+                "Вход через $clientTitle (заказчик)",
+                ['class' => "button button--auth button--$clientTitle"]
+            ) ?>
+        </li>
+    <?php endforeach; ?>
+    </ul>
+    <?php AuthChoice::end(); ?>
+
+    <?php $authAuthChoice = AuthChoice::begin([
+        'baseAuthUrl' => ['external-auth/contractor-auth'],
+        'popupMode' => true,
+        'options' => ['class' => 'auth-container'],
+    ]); ?>
+    <ul class="auth-list">
+    <?php foreach ($authAuthChoice->getClients() as $client): ?>
+        <?php $clientTitle = $client->getTitle() ?>
+        <li>
+            <?= $authAuthChoice->clientLink(
+                $client,
+                "Вход через $clientTitle (исполнитель)",
+                ['class' => "button button--auth button--$clientTitle"]
+            ) ?>
+        </li>
+    <?php endforeach; ?>
+    </ul>
+    <?php AuthChoice::end(); ?>
     </section>
 </div>
 <div class="overlay"></div>

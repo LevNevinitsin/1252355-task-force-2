@@ -1,9 +1,9 @@
 <?php
 namespace LevNevinitsin\Business\Service;
 
+use Yii;
 use app\models\Task;
 use app\models\User;
-use app\models\Response;
 use LevNevinitsin\Business\Exception\GetContractorRankException;
 use LevNevinitsin\Business\Exception\GetContractorStatusException;
 
@@ -102,5 +102,18 @@ class UserService
     public static function getAge(string $birthdate): int
     {
         return (int) (new \DateTime($birthdate))->diff(new \DateTime())->format('%y');
+    }
+
+    /**
+     * Assign RBAC role to user
+     *
+     * @param User $user User instance
+     * @return void
+     */
+    public static function assignRbacRole(User $user)
+    {
+        $auth = Yii::$app->authManager;
+        $authorRole = $auth->getRole($user->role_id === 1 ? 'customer' : 'contractor');
+        $auth->assign($authorRole, $user->id);
     }
 }

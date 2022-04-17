@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\authclient\widgets\AuthChoice;
 ?>
 
 <div class="center-block">
@@ -26,4 +27,46 @@ use yii\widgets\ActiveForm;
             <?= HTML::submitButton('Создать аккаунт', ['class' => 'button button--blue']); ?>
         <?php ActiveForm::end() ?>
     </div>
+    <div class="auth-block auth-block--registration">
+        <?php $authAuthChoice = AuthChoice::begin([
+            'baseAuthUrl' => ['external-auth/customer-auth-registration'],
+            'popupMode' => true,
+            'options' => ['class' => 'auth-container'],
+        ]); ?>
+        <ul class="auth-list">
+        <?php foreach ($authAuthChoice->getClients() as $client): ?>
+            <?php $clientTitle = $client->getTitle() ?>
+            <li>
+                <?= $authAuthChoice->clientLink(
+                    $client,
+                    "Вход через $clientTitle (заказчик)",
+                    ['class' => "button button--auth button--$clientTitle"]
+                ) ?>
+            </li>
+        <?php endforeach; ?>
+        </ul>
+        <?php AuthChoice::end(); ?>
+
+        <?php $authAuthChoice = AuthChoice::begin([
+            'baseAuthUrl' => ['external-auth/contractor-auth-registration'],
+            'popupMode' => true,
+            'options' => ['class' => 'auth-container'],
+        ]); ?>
+        <ul class="auth-list">
+        <?php foreach ($authAuthChoice->getClients() as $client): ?>
+            <?php $clientTitle = $client->getTitle() ?>
+            <li>
+                <?= $authAuthChoice->clientLink(
+                    $client,
+                    "Вход через $clientTitle (исполнитель)",
+                    ['class' => "button button--auth button--$clientTitle"]
+                ) ?>
+            </li>
+        <?php endforeach; ?>
+        </ul>
+        <?php AuthChoice::end(); ?>
+    </div>
+    <?php if ($authError = Yii::$app->getSession()->getFlash('authError')): ?>
+    <div class="auth-error auth-error--registration"><?= Html::encode($authError) ?></div>
+    <?php endif ?>
 </div>
