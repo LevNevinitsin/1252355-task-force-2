@@ -61,34 +61,38 @@ use LevNevinitsin\Business\Service\UserService;
     </div>
     <h4 class="head-regular">Отзывы заказчиков</h4>
     <?php $finishedTasks = $user->finishedTasks ?>
-    <?php foreach ($finishedTasks as $finishedTask): ?>
-    <div class="response-card response-card--user-profile">
-        <?php if ($customerPhoto = $finishedTask->customer->photo): ?>
-        <img class="customer-photo" src="<?= $customerPhoto ?>" width="120" height="127" alt="Фото заказчика">
-        <?php else: ?>
-        <div class="customer-photo customer-photo--absent customer-photo--user-profile">Фото отсутствует</div>
-        <?php endif ?>
-        <div class="feedback-wrapper">
-            <p class="feedback">«<?= $finishedTask->feedback ?>»</p>
-            <p class="task">Задание «<a href="<?= Url::to(['/tasks/view', 'id' => $finishedTask->id]) ?>" class="link link--small"><?= $finishedTask->overview ?></a>» выполнено</p>
-        </div>
-        <div class="feedback-wrapper">
-            <div class="stars-rating small">
-                <?php $taskScore = $finishedTask->score ?>
-                <?php for($i = 1; $i <= 5; $i++): ?>
-                    <?php if ($i <= $taskScore): ?>
-                    <span class="fill-star">&nbsp;</span>
-                    <?php else: ?>
-                    <span class="nofill-star">&nbsp;</span>
-                    <?php endif ?>
-                <?php endfor ?>
+    <?php if ($finishedTasks): ?>
+        <?php foreach ($finishedTasks as $finishedTask): ?>
+        <div class="response-card response-card--user-profile">
+            <?php if ($customerPhoto = $finishedTask->customer->photo): ?>
+            <img class="customer-photo" src="<?= $customerPhoto ?>" width="120" height="127" alt="Фото заказчика">
+            <?php else: ?>
+            <div class="customer-photo customer-photo--absent customer-photo--user-profile">Фото отсутствует</div>
+            <?php endif ?>
+            <div class="feedback-wrapper">
+                <p class="feedback">«<?= $finishedTask->feedback ?>»</p>
+                <p class="task">Задание «<a href="<?= Url::to(['/tasks/view', 'id' => $finishedTask->id]) ?>" class="link link--small"><?= $finishedTask->overview ?></a>» выполнено</p>
             </div>
-            <p class="info-text">
-                <?= StringHelper::mb_ucfirst(Yii::$app->formatter->asRelativeTime($finishedTask->date_updated)) ?>
-            </p>
+            <div class="feedback-wrapper">
+                <div class="stars-rating small">
+                    <?php $taskScore = $finishedTask->score ?>
+                    <?php for($i = 1; $i <= 5; $i++): ?>
+                        <?php if ($i <= $taskScore): ?>
+                        <span class="fill-star">&nbsp;</span>
+                        <?php else: ?>
+                        <span class="nofill-star">&nbsp;</span>
+                        <?php endif ?>
+                    <?php endfor ?>
+                </div>
+                <p class="info-text">
+                    <?= StringHelper::mb_ucfirst(Yii::$app->formatter->asRelativeTime($finishedTask->date_updated)) ?>
+                </p>
+            </div>
         </div>
-    </div>
-    <?php endforeach ?>
+        <?php endforeach ?>
+    <?php else: ?>
+        <div>Отзывов пока нет.</div>
+    <?php endif ?>
 </div>
 <div class="right-column">
     <div class="right-card black">
@@ -104,6 +108,7 @@ use LevNevinitsin\Business\Service\UserService;
             <dd><?= UserService::getStatus($user) ?></dd>
         </dl>
     </div>
+    <?php if ($currentUser->role_id === 1 || $currentUser->id === $user->id || !$user->hide_contacts): ?>
     <div class="right-card white">
         <h4 class="head-card">Контакты</h4>
         <ul class="enumeration-list">
@@ -124,4 +129,5 @@ use LevNevinitsin\Business\Service\UserService;
             <?php endif ?>
         </ul>
     </div>
+    <?php endif ?>
 </div>

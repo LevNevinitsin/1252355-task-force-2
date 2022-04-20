@@ -2,6 +2,7 @@
 namespace app\controllers;
 
 use app\models\User;
+use Yii;
 use yii\web\NotFoundHttpException;
 
 class UsersController extends SecuredController
@@ -14,9 +15,11 @@ class UsersController extends SecuredController
             throw new NotFoundHttpException();
         }
 
+        $currentUser = User::findOne(Yii::$app->user->id);
         $user = User::findOne($id);
 
         return $this->render('user-profile', [
+            'currentUser' => $currentUser,
             'user' => $user,
         ]);
     }
