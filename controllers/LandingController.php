@@ -26,7 +26,7 @@ class LandingController extends Controller
                         'allow' => false,
                         'roles' => ['@'],
                         'denyCallback' => function ($rule, $action) {
-                            $this->redirect('/tasks');
+                            return $this->redirect('/tasks');
                         }
                     ],
                 ],
@@ -49,7 +49,7 @@ class LandingController extends Controller
 
             $user = $loginForm->getUser();
             \Yii::$app->user->login($user);
-            $this->redirect('/tasks');
+            return $this->redirect('/tasks');
         }
 
         $this->view->params['model'] = $loginForm;

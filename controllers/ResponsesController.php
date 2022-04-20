@@ -45,7 +45,7 @@ class ResponsesController extends Controller
             $user = User::findOne(Yii::$app->user->getId());
             $response->user_id = $user->id;
             $response->save();
-            $this->redirect("/tasks/view/$response->task_id");
+            return $this->redirect(['/tasks/view', 'id' => $response->task_id]);
         }
     }
 
@@ -57,7 +57,7 @@ class ResponsesController extends Controller
         $task->task_status_id = 3;
         $task->date_updated = date("Y-m-d H:i:s");
         $task->save();
-        $this->redirect("/tasks/view/$task->id");
+        return $this->redirect(['/tasks/view', 'id' => $task->id]);
     }
 
     public function actionDecline($id)
@@ -66,6 +66,6 @@ class ResponsesController extends Controller
         $task = $response->task;
         $response->is_declined = 1;
         $response->save();
-        $this->redirect("/tasks/view/$task->id");
+        return $this->redirect(['/tasks/view', 'id' => $task->id]);
     }
 }

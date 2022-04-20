@@ -189,7 +189,7 @@ class TasksController extends Controller
                     TaskService::storeUploadedFiles($filesData, $taskId);
                 }
 
-                $this->redirect("/tasks/view/$taskId");
+                return $this->redirect(['/tasks/view', 'id' => $taskId]);
             }
         }
 
@@ -209,7 +209,7 @@ class TasksController extends Controller
         $task->task_status_id = 2;
         $task->date_updated = date("Y-m-d H:i:s");
         $task->save();
-        $this->redirect("/tasks/view/$task->id");
+        return $this->redirect(['/tasks/view', 'id' => $task->id]);
     }
 
     public function actionDecline($id)
@@ -218,7 +218,7 @@ class TasksController extends Controller
         $task->task_status_id = 4;
         $task->date_updated = date("Y-m-d H:i:s");
         $task->save();
-        $this->redirect("/tasks/view/$task->id");
+        return $this->redirect(['/tasks/view', 'id' => $task->id]);
     }
 
     public function actionComplete()
@@ -228,7 +228,7 @@ class TasksController extends Controller
             $task->load(Yii::$app->request->post());
             $task->date_updated = date("Y-m-d H:i:s");
             $task->save();
-            $this->redirect("/tasks/view/$task->id");
+            return $this->redirect(['/tasks/view', 'id' => $task->id]);
         }
     }
 }
