@@ -27,47 +27,33 @@ buttonsClose.forEach(function (el) {
     })
 });
 
-let buttonInput = document.querySelector('#button-input');
+let buttonInput = document.querySelector('.js-avatar-input');
 
 if (buttonInput) {
+    const avatarAbsentElement = document.querySelector('.js-avatar-preview-absent');
+    const hideAvatarElementClass = 'avatar-preview--hidden';
+
     buttonInput.addEventListener('change', function (evt) {
         const file = evt.target.files[0];
         const fileName = file.name.toLowerCase();
 
-        const matches = FILE_TYPES.some(function (it) {
-            return fileName.endsWith(it);
+        const matches = FILE_TYPES.some(function (fileType) {
+            return fileName.endsWith(fileType);
         });
+
         if (matches) {
             const reader = new FileReader();
+
             reader.addEventListener('load', function () {
+                if (avatarAbsentElement) {
+                  avatarAbsentElement.remove();
+                  imgPreviewElement.classList.remove(hideAvatarElementClass);
+                }
+
                 imgPreviewElement.src = reader.result;
             });
+
             reader.readAsDataURL(file);
         }
-    });
-}
-
-var starRating = document.querySelector(".active-stars");
-
-if (starRating) {
-    starRating.addEventListener("click", function(event) {
-        var stars = event.currentTarget.childNodes;
-        var rating = 0;
-
-        for (var i = 0; i < stars.length; i++) {
-            var element = stars[i];
-
-            if (element.nodeName === "SPAN") {
-                element.className = "fill-star";
-                rating++;
-            }
-
-            if (element === event.target) {
-                break;
-            }
-        }
-
-        var inputField = starRating.previousSibling;
-        inputField.value = rating;
     });
 }

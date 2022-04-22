@@ -21,6 +21,7 @@ use yii\web\IdentityInterface;
  * @property string|null $self_description
  * @property int $role_id
  * @property int $fails_count
+ * @property int|null $hide_contacts
  * @property string $date_registered
  *
  * @property Category[] $categories
@@ -88,8 +89,9 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             [['password', 'password_repeat'], 'string', 'min' => 8],
             ['password_repeat', 'compare', 'compareAttribute' => 'password'],
             [['photo'], 'string', 'max' => 255],
-            [['phone'], 'string', 'max' => 11],
+            ['phone', 'match', 'pattern' => '/^7\d{10}$/', 'message' => 'Введите номер в формате 79991234567'],
             [['telegram'], 'string', 'max' => 64],
+            ['hide_contacts', 'boolean'],
             [['city_id'], 'exist', 'skipOnError' => true, 'targetClass' => City::class, 'targetAttribute' => ['city_id' => 'id']],
             [['role_id'], 'exist', 'skipOnError' => true, 'targetClass' => Role::class, 'targetAttribute' => ['role_id' => 'id']],
         ];

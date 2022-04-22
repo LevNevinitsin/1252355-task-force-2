@@ -42,7 +42,7 @@ $userIdentity = Yii::$app->user->identity;
                     <a class="link link--nav" >Новое</a>
                 </li>
                 <li class="list-item">
-                    <a href="#" class="link link--nav" >Мои задания</a>
+                    <a href="/my-tasks" class="link link--nav" >Мои задания</a>
                 </li>
                 <?php if ($userIdentity->role_id === 1): ?>
                 <li class="list-item">
@@ -50,7 +50,7 @@ $userIdentity = Yii::$app->user->identity;
                 </li>
                 <?php endif ?>
                 <li class="list-item">
-                    <a href="#" class="link link--nav" >Настройки</a>
+                    <a href="/edit-profile" class="link link--nav" >Настройки</a>
                 </li>
             </ul>
         </div>
@@ -69,7 +69,7 @@ $userIdentity = Yii::$app->user->identity;
             <div class="popup-head">
                 <ul class="popup-menu">
                     <li class="menu-item">
-                        <a href="#" class="link">Настройки</a>
+                        <a href="/edit-profile" class="link">Настройки</a>
                     </li>
                     <li class="menu-item">
                         <a href="#" class="link">Связаться с нами</a>
@@ -84,7 +84,7 @@ $userIdentity = Yii::$app->user->identity;
     <?php endif ?>
 </header>
 
-<main class="main-content container">
+<main class="main-content container <?= $this->params['mainContentLeft'] ?? ''?>">
     <?= $content ?>
 </main>
 

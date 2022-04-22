@@ -3,12 +3,15 @@
   --light: #f8f8f8;
   --lightgrey: #bbbbbb;
   --grey: #888888;
+  --grey-2: #989898;
   --black: #000000;
 
   --error: #c7e3ff;
   --vk: #0077ff;
   --vk-pale: #6cb5ff;
   --vk-light: #ecf5ff;
+
+  --profile-checkbox-label: var(--grey-2);
 }
 
 /* --- Landing page --- */
@@ -496,4 +499,91 @@
 .stars-rating--interactive[data-total-value="4"] .rating-item:nth-child(n + 2),
 .stars-rating--interactive[data-total-value="5"] .rating-item:nth-child(n + 1) {
   background-image: url("../img/star-fill.svg");
+}
+
+/* --- Edit profile --- */
+
+.photo-editing {
+  align-items: flex-start;
+}
+
+.photo-editing .avatar-container {
+  min-width: 81px;
+  min-height: 125px;
+  margin-right: 23px;
+}
+
+.photo-editing .avatar-container .avatar-preview {
+  display: block;
+}
+
+.photo-editing .avatar-container .avatar-preview--hidden {
+  display: none;
+}
+
+.photo-editing .avatar-container .avatar-preview--absent {
+  display: flex;
+  align-items: center;
+  width: 61px;
+  height: 61px;
+  padding: 10px;
+
+  font-size: 14px;
+  text-align: center;
+  color: var(--grey);
+
+  background-color: var(--light);
+  border: 1px solid var(--grey);
+  border-radius: 4px;
+}
+
+.photo-editing .avatar-container .avatar-caption {
+  margin-bottom: 14px;
+}
+
+.photo-editing img {
+  margin: 0;
+}
+
+.photo-editing .button {
+  display: block;
+  width: max-content;
+  margin-top: 50px;
+  margin-left: 0;
+}
+
+.my-profile-form .half-wrapper {
+  display: grid;
+  grid-template-columns: 299px 192px;
+  column-gap: 21px;
+}
+
+.my-profile-form .has-error .help-block {
+  line-height: 1.5;
+}
+
+.my-profile-form .categories-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 15px;
+  margin-bottom: 20px;
+}
+
+.my-profile-form .categories-list label {
+  font-size: 16px;
+  color: var(--profile-checkbox-label);
+
+  cursor: pointer;
+}
+
+.my-profile-form .button--submit {
+  display: block;
+  min-width: 193px;
+  padding: 15px 43px;
+  margin-bottom: 0;
+  margin-left: auto;
+
+  font-size: 19px;
+
+  border: none;
 }

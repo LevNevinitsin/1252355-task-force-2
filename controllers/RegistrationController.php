@@ -24,7 +24,7 @@ class RegistrationController extends Controller
                         'allow' => false,
                         'roles' => ['@'],
                         'denyCallback' => function ($rule, $action) {
-                            $this->redirect('/tasks');
+                            return $this->redirect('/tasks');
                         }
                     ],
                 ],
@@ -45,7 +45,7 @@ class RegistrationController extends Controller
                 $user->save(false);
                 $user->refresh();
                 UserService::assignRbacRole($user);
-                $this->goHome();
+                return $this->goHome();
             }
         }
 
