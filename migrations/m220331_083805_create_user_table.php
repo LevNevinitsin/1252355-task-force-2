@@ -79,7 +79,6 @@ class m220331_083805_create_user_table extends Migration
             'telegram',
             'self_description',
             'role_id',
-            'fails_count',
             'date_registered',
         ], $testUsers);
     }
