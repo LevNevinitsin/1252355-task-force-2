@@ -20,7 +20,6 @@ use yii\web\IdentityInterface;
  * @property string|null $telegram
  * @property string|null $self_description
  * @property int $role_id
- * @property int $fails_count
  * @property int|null $hide_contacts
  * @property string $date_registered
  *
@@ -80,7 +79,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             [['name', 'email', 'password', 'city_id', 'role_id'], 'required'],
-            [['city_id', 'role_id', 'fails_count'], 'integer'],
+            [['city_id', 'role_id'], 'integer'],
             [['birthdate', 'date_registered'], 'safe'],
             [['self_description'], 'string'],
             [['name'], 'string', 'max' => 100],
@@ -115,7 +114,6 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'telegram' => 'Telegram',
             'self_description' => 'Self Description',
             'role_id' => 'Role ID',
-            'fails_count' => 'Fails Count',
             'date_registered' => 'Date Registered',
         ];
     }

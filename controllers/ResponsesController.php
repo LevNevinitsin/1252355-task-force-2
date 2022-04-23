@@ -7,6 +7,8 @@ use yii\filters\AccessControl;
 use app\models\Response;
 use app\models\User;
 use app\models\Task;
+use LevNevinitsin\Business\Action\AcceptAction;
+use LevNevinitsin\Business\Task as BusinessTask;
 
 class ResponsesController extends Controller
 {
@@ -51,12 +53,11 @@ class ResponsesController extends Controller
     public function actionAccept($id)
     {
         $response = Response::findOne($id);
-        $task = $response->task;
-        $task->contractor_id = $response->user_id;
-        $task->task_status_id = 3;
-        $task->date_updated = date("Y-m-d H:i:s");
-        $task->save();
-        return $this->redirect(['/tasks/view', 'id' => $task->id]);
+        $taskRecord = $response->task;
+        $taskRecord->contractor_id = $response->user_id;
+        $task = new BusinessTask($taskRecord);
+        $task->takeAction(new AcceptAction());
+        return $this->redirect(['/tasks/view', 'id' => $taskRecord->id]);
     }
 
     public function actionDecline($id)

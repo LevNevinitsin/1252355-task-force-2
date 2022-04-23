@@ -28,7 +28,6 @@ class m220331_083805_create_user_table extends Migration
             'telegram' => $this->string(64),
             'self_description' => $this->text(),
             'role_id' => $this->integer()->notNull(),
-            'fails_count' => $this->integer()->notNull()->defaultValue(0),
             'hide_contacts' => $this->tinyInteger(),
             'date_registered' => $this->datetime()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
         ]);

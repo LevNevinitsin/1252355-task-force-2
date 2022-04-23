@@ -137,11 +137,6 @@ if ($isTaskView) {
         ],
     ]) ?>
         <?= $form->field($this->params['taskModel'], 'task_id')->hiddenInput(['value'=> $taskId])->label(false)->error(false) ?>
-        <?= $form->field($this->params['taskModel'], 'task_status_id', ['inputOptions' => ['class' => 'task-status-id']])
-            ->hiddenInput(['value'=> 5])
-            ->label(false)
-            ->error(false)
-        ?>
 
         <div class="rating-container">
             <p class="rating-label">Оценка:</p>
