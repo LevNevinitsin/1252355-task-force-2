@@ -48,6 +48,13 @@
 
 /* --- Tasks list --- */
 
+.tasks-list {
+  margin: 0 0 40px 0;
+  padding: 0;
+
+  list-style: none;
+}
+
 .search-form {
   padding-bottom: 0;
 }
@@ -90,6 +97,70 @@
 .search-form .button.button--blue {
   width: calc(100% - 26px * 2);
   margin: 0;
+}
+
+/* --- Pagination --- */
+
+.pagination-list {
+  margin-bottom: 40px;
+}
+
+.pagination-item {
+  width: 50px;
+  margin-top: 0;
+}
+
+.pagination-item .link--page {
+  display: flex;
+  padding: 12px 0;
+  justify-content: center;
+}
+
+.pagination-item.mark .link--page {
+  min-height: 23px;
+}
+
+.pagination-item.mark {
+  cursor: pointer;
+}
+
+.pagination-item.mark.disabled {
+  cursor: default;
+}
+
+.pagination-item.mark::after {
+  z-index: 1;
+
+  pointer-events: none;
+}
+
+.pagination-item.mark::after,
+.pagination-item.mark::before {
+  pointer-events: none;
+}
+
+.pagination-item.mark:hover::after {
+  /* same icon on hover */
+  background-image: url('/img/arrow-hover.svg');
+}
+
+.pagination-item.mark:hover::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 30px;
+  height: 30px;
+
+  background-color: #f5f5f6;
+  border-radius: 15px;
+
+  transform: translate(-50%, -50%);
+}
+
+.pagination-item.mark.disabled:hover::before {
+  content: none;
 }
 
 /* --- Task page --- */
