@@ -71,6 +71,7 @@ class TasksController extends Controller
     {
         $task = new Task();
         $category = new Category();
+        $pageSize = 5;
 
         $request = Yii::$app->request;
         $selectedCategories = $request->get('Category')['id'] ?? [];
@@ -88,7 +89,14 @@ class TasksController extends Controller
             $selectedPeriod
         );
 
-        $newTasks = $tasksQuery->orderBy(['date_created' => SORT_DESC])->all();
+        $tasksCount = $tasksQuery->count();
+        $pagination = new Pagination(['totalCount' => $tasksCount, 'pageSize' => $pageSize]);
+
+        $newTasks = $tasksQuery->orderBy(['date_created' => SORT_DESC])
+            ->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
+
         $categories = Category::find()->select(['name'])->orderBy(['id' => SORT_ASC])->indexBy('id')->column();
 
         return $this->render('tasks', [
@@ -100,6 +108,7 @@ class TasksController extends Controller
             'shouldShowRemoteOnly'       => $shouldShowRemoteOnly,
             'shouldShowWithoutResponses' => $shouldShowWithoutResponses,
             'selectedPeriod'             => $selectedPeriod,
+            'pagination'                 => $pagination,
         ]);
     }
 

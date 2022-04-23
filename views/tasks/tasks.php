@@ -1,51 +1,46 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\widgets\LinkPager;
 use yii\helpers\StringHelper;
 use yii\helpers\Url;
 ?>
 
 <div class="left-column">
     <h3 class="head-main head-task">Новые задания</h3>
-    <?php foreach ($newTasks as $newTask): ?>
-    <div class="task-card">
-        <?php $taskUrl = Url::to(['/tasks/view', 'id' => $newTask->id]) ?>
-        <div class="header-task">
-            <a  href="<?= $taskUrl ?>" class="link link--block link--big"><?= $newTask->overview ?></a>
-            <p class="price price--task">
-                <?= Yii::$app->formatter->asCurrency($newTask->budget, 'RUB', [NumberFormatter::MAX_FRACTION_DIGITS => 0]) ?>
+    <ul class="tasks-list">
+        <?php foreach ($newTasks as $newTask): ?>
+        <li class="task-card">
+            <?php $taskUrl = Url::to(['/tasks/view', 'id' => $newTask->id]) ?>
+            <div class="header-task">
+                <a  href="<?= $taskUrl ?>" class="link link--block link--big"><?= $newTask->overview ?></a>
+                <p class="price price--task">
+                    <?= Yii::$app->formatter->asCurrency($newTask->budget, 'RUB', [NumberFormatter::MAX_FRACTION_DIGITS => 0]) ?>
+                </p>
+            </div>
+            <p class="info-text">
+                <?= StringHelper::mb_ucfirst(Yii::$app->formatter->asRelativeTime($newTask->date_created)) ?>
             </p>
-        </div>
-        <p class="info-text">
-            <?= StringHelper::mb_ucfirst(Yii::$app->formatter->asRelativeTime($newTask->date_created)) ?>
-        </p>
-        <p class="task-text"><?= $newTask->description ?></p>
-        <div class="footer-task">
-            <p class="info-text town-text"><?= $newTask->city->name ?? 'Удалённая работа' ?></p>
-            <p class="info-text category-text"><?= $newTask->category->name ?></p>
-            <a href="<?= $taskUrl ?>" class="button button--black">Смотреть&nbsp;Задание</a>
-        </div>
-    </div>
-    <?php endforeach ?>
-    <div class="pagination-wrapper">
-        <ul class="pagination-list">
-            <li class="pagination-item mark">
-                <a href="#" class="link link--page"></a>
-            </li>
-            <li class="pagination-item">
-                <a href="#" class="link link--page">1</a>
-            </li>
-            <li class="pagination-item pagination-item--active">
-                <a href="#" class="link link--page">2</a>
-            </li>
-            <li class="pagination-item">
-                <a href="#" class="link link--page">3</a>
-            </li>
-            <li class="pagination-item mark">
-                <a href="#" class="link link--page"></a>
-            </li>
-        </ul>
-    </div>
+            <p class="task-text"><?= $newTask->description ?></p>
+            <div class="footer-task">
+                <p class="info-text town-text"><?= $newTask->city->name ?? 'Удалённая работа' ?></p>
+                <p class="info-text category-text"><?= $newTask->category->name ?></p>
+                <a href="<?= $taskUrl ?>" class="button button--black">Смотреть&nbsp;Задание</a>
+            </div>
+        </li>
+        <?php endforeach ?>
+    </ul>
+    <?= LinkPager::widget([
+        'pagination' => $pagination,
+        'options' => ['class' => 'pagination-list'],
+        'prevPageLabel' => '',
+        'prevPageCssClass' => 'pagination-item mark',
+        'nextPageLabel' => '',
+        'nextPageCssClass' => 'pagination-item mark',
+        'pageCssClass' => 'pagination-item',
+        'activePageCssClass' => 'pagination-item--active',
+        'linkOptions' => ['class' => 'link link--page'],
+    ]) ?>
 </div>
 <div class="right-column">
     <div class="right-card black">
