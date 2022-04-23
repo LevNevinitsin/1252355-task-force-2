@@ -26,12 +26,6 @@ $this->registerJsFile('/js/location-autocomplete.js');
             <?= $form->field($model, 'cityName', ['inputOptions' => ['class' => 'js-cityName']])
                 ->hiddenInput()->label(false)->error(false) ?>
 
-            <div class="form-group">
-                <label class="control-label" for="location">Локация</label>
-                <input id="location" type="text" disabled>
-                <div class="help-block"></div>
-            </div>
-
             <div class="half-wrapper">
                 <?= $form->field($model, 'budget')->textInput(['type' => 'number']) ?>
                 <?= $form->field($model, 'deadline', ['enableAjaxValidation' => true])->textInput(['type' => 'date']) ?>
