@@ -15,8 +15,13 @@ use yii\filters\AccessControl;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use GuzzleHttp\Client;
+use LevNevinitsin\Business\Action\CancelAction;
+use LevNevinitsin\Business\Action\CompleteAction;
+use LevNevinitsin\Business\Action\DeclineAction;
 use LevNevinitsin\Business\Service\TaskService;
 use LevNevinitsin\Business\Service\LocationService;
+use LevNevinitsin\Business\Task as BusinessTask;
+use yii\data\Pagination;
 
 class TasksController extends Controller
 {
@@ -214,30 +219,30 @@ class TasksController extends Controller
 
     public function actionCancel($id)
     {
-        $task = Task::findOne($id);
-        $task->task_status_id = 2;
-        $task->date_updated = date("Y-m-d H:i:s");
-        $task->save();
-        return $this->redirect(['/tasks/view', 'id' => $task->id]);
+        $taskRecord = Task::findOne($id);
+        $task = new BusinessTask($taskRecord);
+        $task->takeAction(new CancelAction());
+        return $this->redirect(['/tasks/view', 'id' => $taskRecord->id]);
     }
 
     public function actionDecline($id)
     {
-        $task = Task::findOne($id);
-        $task->task_status_id = 4;
-        $task->date_updated = date("Y-m-d H:i:s");
-        $task->save();
-        return $this->redirect(['/tasks/view', 'id' => $task->id]);
+        $taskRecord = Task::findOne($id);
+        $task = new BusinessTask($taskRecord);
+        $task->takeAction(new DeclineAction());
+        return $this->redirect(['/tasks/view', 'id' => $taskRecord->id]);
     }
 
     public function actionComplete()
     {
         if (Yii::$app->request->getIsPost()) {
-            $task = Task::findOne(Yii::$app->request->post('Task')['task_id']);
-            $task->load(Yii::$app->request->post());
-            $task->date_updated = date("Y-m-d H:i:s");
-            $task->save();
-            return $this->redirect(['/tasks/view', 'id' => $task->id]);
+            $requestData = Yii::$app->request->post('Task');
+            $taskRecord = Task::findOne($requestData['task_id']);
+            $taskRecord->score = $requestData['score'];
+            $taskRecord->feedback = $requestData['feedback'];
+            $task = new BusinessTask($taskRecord);
+            $task->takeAction(new CompleteAction());
+            return $this->redirect(['/tasks/view', 'id' => $taskRecord->id]);
         }
     }
 }
