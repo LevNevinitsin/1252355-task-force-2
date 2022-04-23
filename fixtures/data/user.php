@@ -12,7 +12,6 @@ return [
         'telegram' => 'fugiat',
         'self_description' => 'Recusandae aperiam voluptas et perspiciatis laudantium aut. Qui fuga assumenda nemo quae modi sapiente sed excepturi. Earum et corporis ut dolore eveniet est.',
         'role_id' => 2,
-        'fails_count' => 5,
         'date_registered' => '2021-05-19 03:56:09',
     ],
     'user1' => [
@@ -26,7 +25,6 @@ return [
         'telegram' => 'omnis',
         'self_description' => null,
         'role_id' => 2,
-        'fails_count' => 6,
         'date_registered' => '2020-10-03 09:45:19',
     ],
     'user2' => [
@@ -40,7 +38,6 @@ return [
         'telegram' => 'ea',
         'self_description' => 'Doloremque optio qui quae aut id. Sit consectetur incidunt deserunt fuga repellendus amet adipisci. Consequatur assumenda occaecati minima quam porro magni pariatur minima. Architecto vitae velit aut.',
         'role_id' => 1,
-        'fails_count' => 4,
         'date_registered' => '2021-01-18 04:43:30',
     ],
     'user3' => [
@@ -54,7 +51,6 @@ return [
         'telegram' => 'rerum',
         'self_description' => 'Ipsa eius voluptas omnis aut culpa debitis. Magnam minus distinctio eos ea qui et.',
         'role_id' => 2,
-        'fails_count' => 9,
         'date_registered' => '2021-02-07 07:46:38',
     ],
     'user4' => [
@@ -68,7 +64,6 @@ return [
         'telegram' => 'incidunt',
         'self_description' => 'Veniam vel aut aut sit. Et non possimus qui ipsum blanditiis molestiae deleniti. Porro consectetur sunt sit ea.',
         'role_id' => 2,
-        'fails_count' => 2,
         'date_registered' => '2021-05-16 13:59:33',
     ],
     'user5' => [
@@ -82,7 +77,6 @@ return [
         'telegram' => 'maxime',
         'self_description' => 'Est doloremque magni rerum ipsa ad et. Est et soluta veniam. Quis aspernatur sint in qui hic. Quam consequatur sed facilis et.',
         'role_id' => 2,
-        'fails_count' => 0,
         'date_registered' => '2020-04-26 06:50:09',
     ],
     'user6' => [
@@ -96,7 +90,6 @@ return [
         'telegram' => 'deleniti',
         'self_description' => 'Quibusdam inventore assumenda aut iste iure itaque. Inventore consequatur dolor dolor enim sunt qui qui. Tempore nihil exercitationem autem dolore qui voluptas. Qui nisi autem nihil doloremque blanditiis.',
         'role_id' => 1,
-        'fails_count' => 8,
         'date_registered' => '2020-12-31 20:32:37',
     ],
     'user7' => [
@@ -110,7 +103,6 @@ return [
         'telegram' => 'minima',
         'self_description' => 'Consequuntur voluptatem consequatur ut beatae magni in illum dolor. Blanditiis corrupti est error optio necessitatibus voluptates temporibus. Magni nobis corporis velit. Accusantium cumque et culpa sequi. Libero explicabo et incidunt amet.',
         'role_id' => 2,
-        'fails_count' => 1,
         'date_registered' => '2020-06-28 02:25:59',
     ],
     'user8' => [
@@ -124,7 +116,6 @@ return [
         'telegram' => null,
         'self_description' => 'Sit omnis ipsam mollitia ea sunt. Ullam accusantium est illum. Consectetur est totam asperiores doloribus quos et aliquid.',
         'role_id' => 1,
-        'fails_count' => 0,
         'date_registered' => '2021-08-26 13:06:52',
     ],
     'user9' => [
@@ -138,7 +129,6 @@ return [
         'telegram' => null,
         'self_description' => 'Recusandae nostrum cupiditate totam qui. Aut accusamus inventore et ab eum quia. Qui ut ut a cumque quibusdam facilis.',
         'role_id' => 2,
-        'fails_count' => 3,
         'date_registered' => '2021-07-09 05:44:39',
     ],
     'user10' => [
@@ -152,7 +142,6 @@ return [
         'telegram' => 'voluptatem',
         'self_description' => 'Magni est minus consequatur. Qui rerum veritatis a sed. Sapiente vel numquam et eos.',
         'role_id' => 1,
-        'fails_count' => 6,
         'date_registered' => '2020-05-19 17:39:51',
     ],
     'user11' => [
@@ -166,7 +155,6 @@ return [
         'telegram' => 'ut',
         'self_description' => 'Iure placeat perspiciatis suscipit dolorem qui facere blanditiis. Rerum voluptatum ipsa impedit amet unde nulla blanditiis. Iste distinctio maiores est. Hic doloribus odit quae sequi praesentium esse rem. Et earum excepturi deleniti labore est ipsam.',
         'role_id' => 2,
-        'fails_count' => 6,
         'date_registered' => '2021-08-10 20:40:12',
     ],
     'user12' => [
@@ -180,7 +168,6 @@ return [
         'telegram' => null,
         'self_description' => 'Voluptatem eveniet voluptatem voluptas et nihil voluptas omnis. Sit illum aut doloribus sed quam amet earum. Eveniet rerum animi itaque alias eveniet. Et alias tenetur quibusdam et voluptas voluptate.',
         'role_id' => 2,
-        'fails_count' => 6,
         'date_registered' => '2021-11-09 06:32:11',
     ],
     'user13' => [
@@ -194,7 +181,6 @@ return [
         'telegram' => 'ex',
         'self_description' => 'Culpa quam et esse qui. Id fuga perspiciatis quia quas et aut distinctio. Dolor consequatur sunt nostrum et nisi. Sapiente qui optio aut reprehenderit cum sed.',
         'role_id' => 2,
-        'fails_count' => 4,
         'date_registered' => '2020-07-18 05:57:05',
     ],
     'user14' => [
@@ -208,7 +194,6 @@ return [
         'telegram' => null,
         'self_description' => 'Omnis ut minus qui deleniti odio suscipit perspiciatis quisquam. Fugit est harum quae quo sequi.',
         'role_id' => 2,
-        'fails_count' => 0,
         'date_registered' => '2020-06-04 15:42:18',
     ],
     'user15' => [
@@ -222,7 +207,6 @@ return [
         'telegram' => 'voluptates',
         'self_description' => 'Consectetur doloremque harum consequatur facere atque. Est alias quia quam qui ducimus esse repellat.',
         'role_id' => 1,
-        'fails_count' => 1,
         'date_registered' => '2021-12-12 13:30:25',
     ],
     'user16' => [
@@ -236,7 +220,6 @@ return [
         'telegram' => 'inventore',
         'self_description' => 'Quod omnis voluptas et perspiciatis ex molestiae. Consequuntur ipsum deleniti reiciendis neque aliquid. Hic a porro vitae excepturi quis laudantium voluptatem. Enim qui blanditiis repudiandae expedita.',
         'role_id' => 2,
-        'fails_count' => 0,
         'date_registered' => '2021-01-02 05:08:58',
     ],
     'user17' => [
@@ -250,7 +233,6 @@ return [
         'telegram' => 'est',
         'self_description' => 'Modi non sapiente voluptatem itaque aut expedita. Ut exercitationem porro reprehenderit quas provident. Voluptates nobis facilis non sint et dignissimos sit. Voluptatum atque sed consequatur totam. Velit architecto in quasi aut a voluptate.',
         'role_id' => 1,
-        'fails_count' => 5,
         'date_registered' => '2021-10-25 04:13:14',
     ],
     'user18' => [
@@ -264,7 +246,6 @@ return [
         'telegram' => 'totam',
         'self_description' => null,
         'role_id' => 2,
-        'fails_count' => 6,
         'date_registered' => '2022-01-14 00:47:18',
     ],
     'user19' => [
@@ -278,7 +259,6 @@ return [
         'telegram' => 'impedit',
         'self_description' => 'Nostrum quam iure sit incidunt odit est voluptatem maiores. Autem repellendus blanditiis at fugit.',
         'role_id' => 1,
-        'fails_count' => 8,
         'date_registered' => '2020-05-20 14:44:26',
     ],
     'user20' => [
@@ -292,7 +272,6 @@ return [
         'telegram' => 'velit',
         'self_description' => 'Tenetur dignissimos neque quo velit voluptatem animi vel. Culpa facere ad dolores sit sit. Ut rerum autem consequatur odit.',
         'role_id' => 1,
-        'fails_count' => 1,
         'date_registered' => '2021-03-30 08:57:50',
     ],
     'user21' => [
@@ -306,7 +285,6 @@ return [
         'telegram' => 'porro',
         'self_description' => 'Ut porro doloribus accusamus ut repellat perferendis. Totam est in iste sit illum. Voluptatem sit sit ipsa error excepturi dolore.',
         'role_id' => 1,
-        'fails_count' => 2,
         'date_registered' => '2020-08-17 04:49:07',
     ],
     'user22' => [
@@ -320,7 +298,6 @@ return [
         'telegram' => 'perspiciatis',
         'self_description' => 'Perspiciatis odit et voluptate dolorum ut laboriosam. Rerum explicabo suscipit laudantium qui dignissimos. Aliquam omnis voluptatem dignissimos quia.',
         'role_id' => 1,
-        'fails_count' => 3,
         'date_registered' => '2020-05-17 05:16:45',
     ],
     'user23' => [
@@ -334,7 +311,6 @@ return [
         'telegram' => null,
         'self_description' => null,
         'role_id' => 2,
-        'fails_count' => 3,
         'date_registered' => '2021-08-07 14:17:51',
     ],
     'user24' => [
@@ -348,7 +324,6 @@ return [
         'telegram' => null,
         'self_description' => 'Non modi qui aut impedit aperiam. Enim praesentium enim dolorem dignissimos.',
         'role_id' => 1,
-        'fails_count' => 0,
         'date_registered' => '2020-05-02 15:56:08',
     ],
     'user25' => [
@@ -362,7 +337,6 @@ return [
         'telegram' => 'eum',
         'self_description' => 'Rerum sed ab at tenetur excepturi dolores aperiam numquam. Ut nostrum fugiat itaque aut. Velit cumque debitis ut quod ea sit perferendis. Debitis maiores incidunt officia aliquid molestiae voluptatem dolorum.',
         'role_id' => 2,
-        'fails_count' => 3,
         'date_registered' => '2021-12-05 21:44:40',
     ],
     'user26' => [
@@ -376,7 +350,6 @@ return [
         'telegram' => 'debitis',
         'self_description' => 'Nesciunt unde odio est aspernatur at soluta. Amet omnis nam architecto et tempore non. Ut perspiciatis et omnis natus.',
         'role_id' => 1,
-        'fails_count' => 8,
         'date_registered' => '2021-05-08 22:10:16',
     ],
     'user27' => [
@@ -390,7 +363,6 @@ return [
         'telegram' => 'sed',
         'self_description' => 'Optio et harum consequatur voluptas numquam voluptatem molestiae. Ea eveniet doloribus commodi fuga reprehenderit autem. Illum accusantium rem facere debitis magnam magni sit. Facere et ea ipsa eos doloremque.',
         'role_id' => 1,
-        'fails_count' => 9,
         'date_registered' => '2020-08-09 19:08:44',
     ],
     'user28' => [
@@ -404,7 +376,6 @@ return [
         'telegram' => 'natus',
         'self_description' => 'Debitis in enim inventore debitis enim eius quam rerum. Deserunt nobis illo ut et. Voluptatem sint consectetur magni quaerat iusto. Porro quod doloremque harum quia cum aut culpa totam.',
         'role_id' => 1,
-        'fails_count' => 3,
         'date_registered' => '2022-03-16 07:52:09',
     ],
     'user29' => [
@@ -418,7 +389,6 @@ return [
         'telegram' => 'ex',
         'self_description' => 'Voluptatum eaque maiores omnis totam itaque vel et. Fugiat et harum id sed explicabo repellendus. Ut optio accusantium et vel omnis corrupti nihil.',
         'role_id' => 2,
-        'fails_count' => 7,
         'date_registered' => '2021-05-14 04:32:06',
     ],
     'user30' => [
@@ -432,7 +402,6 @@ return [
         'telegram' => null,
         'self_description' => 'Eaque voluptate porro libero asperiores officia autem aspernatur. Sint consequatur est laboriosam. Nemo harum sequi ipsa neque consequuntur mollitia distinctio hic.',
         'role_id' => 1,
-        'fails_count' => 6,
         'date_registered' => '2020-08-17 21:01:43',
     ],
     'user31' => [
@@ -446,7 +415,6 @@ return [
         'telegram' => 'ex',
         'self_description' => 'Ea assumenda autem sed sunt dolorem magni. Delectus molestiae ipsum ut nemo. Et dolor et eaque ut esse vero.',
         'role_id' => 1,
-        'fails_count' => 8,
         'date_registered' => '2021-05-26 06:53:45',
     ],
     'user32' => [
@@ -460,7 +428,6 @@ return [
         'telegram' => 'sed',
         'self_description' => 'Nemo sed quod dolor esse ut et velit rerum. Autem expedita qui placeat sint nam. Atque fugiat consequuntur autem inventore molestias et.',
         'role_id' => 2,
-        'fails_count' => 4,
         'date_registered' => '2021-08-05 19:43:19',
     ],
     'user33' => [
@@ -474,7 +441,6 @@ return [
         'telegram' => 'esse',
         'self_description' => 'Voluptatibus minima porro molestiae voluptate hic. Saepe pariatur repellat necessitatibus aut consequatur nemo aliquid. Doloremque esse aut incidunt odio qui.',
         'role_id' => 2,
-        'fails_count' => 9,
         'date_registered' => '2021-07-26 08:55:41',
     ],
     'user34' => [
@@ -488,7 +454,6 @@ return [
         'telegram' => 'quis',
         'self_description' => 'Iure optio quia veritatis aperiam. Aperiam qui ab autem iste sapiente sequi est. Est dicta sit doloremque. Aut minima a qui nemo cupiditate aut.',
         'role_id' => 1,
-        'fails_count' => 3,
         'date_registered' => '2021-11-25 14:34:50',
     ],
     'user35' => [
@@ -502,7 +467,6 @@ return [
         'telegram' => 'voluptas',
         'self_description' => null,
         'role_id' => 2,
-        'fails_count' => 0,
         'date_registered' => '2020-06-20 08:09:46',
     ],
     'user36' => [
@@ -516,7 +480,6 @@ return [
         'telegram' => 'at',
         'self_description' => null,
         'role_id' => 2,
-        'fails_count' => 0,
         'date_registered' => '2021-02-25 13:33:28',
     ],
     'user37' => [
@@ -530,7 +493,6 @@ return [
         'telegram' => null,
         'self_description' => 'Assumenda impedit nisi eius. Vel velit assumenda suscipit mollitia dolores voluptate aut consequatur. Eos voluptatum assumenda earum deserunt illum sequi.',
         'role_id' => 1,
-        'fails_count' => 5,
         'date_registered' => '2021-08-23 13:35:22',
     ],
     'user38' => [
@@ -544,7 +506,6 @@ return [
         'telegram' => 'incidunt',
         'self_description' => 'Blanditiis voluptatem repudiandae quam laudantium sint. Iusto qui non corrupti odio. Voluptas ducimus animi ut. Dolorum voluptate hic sunt commodi.',
         'role_id' => 2,
-        'fails_count' => 6,
         'date_registered' => '2020-09-23 18:34:28',
     ],
     'user39' => [
@@ -558,7 +519,6 @@ return [
         'telegram' => 'non',
         'self_description' => 'Inventore sed consequuntur qui commodi vel et eum. Odio ut saepe non corporis iure unde dolor. Voluptatem sed iure sapiente quia quo blanditiis quia. Dolore perferendis eius nesciunt sunt nisi dolorem.',
         'role_id' => 2,
-        'fails_count' => 7,
         'date_registered' => '2021-11-06 11:28:51',
     ],
     'user40' => [
@@ -572,7 +532,6 @@ return [
         'telegram' => null,
         'self_description' => null,
         'role_id' => 2,
-        'fails_count' => 9,
         'date_registered' => '2021-07-20 01:54:45',
     ],
     'user41' => [
@@ -586,7 +545,6 @@ return [
         'telegram' => 'nobis',
         'self_description' => null,
         'role_id' => 1,
-        'fails_count' => 4,
         'date_registered' => '2021-11-01 04:30:17',
     ],
     'user42' => [
@@ -600,7 +558,6 @@ return [
         'telegram' => null,
         'self_description' => 'Impedit autem accusantium sunt et. Quas ducimus fugit atque esse ut aut recusandae inventore. Distinctio eveniet excepturi sunt expedita voluptatem voluptatem quis. Enim commodi quis eveniet ut quo doloremque.',
         'role_id' => 1,
-        'fails_count' => 5,
         'date_registered' => '2021-05-11 03:39:00',
     ],
     'user43' => [
@@ -614,7 +571,6 @@ return [
         'telegram' => null,
         'self_description' => 'Iusto quia ea magni voluptatibus voluptates totam. Ea quasi ipsa assumenda tempora consectetur cupiditate sapiente. Rerum sit sint quis mollitia deserunt. Ea omnis velit beatae et omnis. Placeat eaque excepturi voluptas dolor voluptas architecto ut.',
         'role_id' => 1,
-        'fails_count' => 5,
         'date_registered' => '2021-09-12 18:29:56',
     ],
     'user44' => [
@@ -628,7 +584,6 @@ return [
         'telegram' => 'ut',
         'self_description' => 'Soluta qui ducimus ullam quia aliquam occaecati. Ipsa distinctio corporis veritatis ducimus qui aliquam quia. At molestias necessitatibus autem in maxime. Nesciunt aut ipsam sit accusamus.',
         'role_id' => 1,
-        'fails_count' => 5,
         'date_registered' => '2021-07-23 19:19:12',
     ],
     'user45' => [
@@ -642,7 +597,6 @@ return [
         'telegram' => 'molestias',
         'self_description' => null,
         'role_id' => 2,
-        'fails_count' => 2,
         'date_registered' => '2021-04-17 23:57:51',
     ],
     'user46' => [
@@ -656,7 +610,6 @@ return [
         'telegram' => null,
         'self_description' => 'Neque dolorem necessitatibus vitae sit. Iste et illo impedit quas. Enim sit architecto qui culpa. Eos saepe autem at ut ab excepturi hic aut.',
         'role_id' => 1,
-        'fails_count' => 0,
         'date_registered' => '2021-11-08 07:19:10',
     ],
     'user47' => [
@@ -670,7 +623,6 @@ return [
         'telegram' => 'praesentium',
         'self_description' => 'Voluptatum eaque explicabo sapiente mollitia vel quo esse. Quis alias dicta totam sint omnis. Doloribus est dolor consequuntur ut. Accusamus repudiandae quo aut ipsum minus voluptatem.',
         'role_id' => 1,
-        'fails_count' => 3,
         'date_registered' => '2020-09-22 22:19:35',
     ],
     'user48' => [
@@ -684,7 +636,6 @@ return [
         'telegram' => 'laborum',
         'self_description' => 'Sunt officiis et modi suscipit. Quae praesentium itaque aperiam recusandae sit. Provident vel quis sit aut.',
         'role_id' => 2,
-        'fails_count' => 5,
         'date_registered' => '2020-10-30 05:46:27',
     ],
     'user49' => [
@@ -698,7 +649,6 @@ return [
         'telegram' => 'impedit',
         'self_description' => 'Molestiae officia reiciendis sed quis sequi doloribus. Deleniti incidunt suscipit cumque.',
         'role_id' => 2,
-        'fails_count' => 0,
         'date_registered' => '2021-10-03 11:54:22',
     ],
     'user50' => [
@@ -712,7 +662,6 @@ return [
         'telegram' => 'velit',
         'self_description' => 'Quo ut cum eveniet repudiandae. Nihil voluptas nisi fugit eum. Sunt vel tempore blanditiis qui.',
         'role_id' => 2,
-        'fails_count' => 7,
         'date_registered' => '2021-12-05 08:19:19',
     ],
     'user51' => [
@@ -726,7 +675,6 @@ return [
         'telegram' => 'laborum',
         'self_description' => 'Qui eius dolor animi est. Nihil dolor ut minus sed omnis. Repellendus hic soluta at ab esse eius.',
         'role_id' => 1,
-        'fails_count' => 0,
         'date_registered' => '2021-11-13 06:18:50',
     ],
     'user52' => [
@@ -740,7 +688,6 @@ return [
         'telegram' => 'facere',
         'self_description' => null,
         'role_id' => 2,
-        'fails_count' => 0,
         'date_registered' => '2020-08-26 04:06:23',
     ],
     'user53' => [
@@ -754,7 +701,6 @@ return [
         'telegram' => null,
         'self_description' => null,
         'role_id' => 1,
-        'fails_count' => 4,
         'date_registered' => '2021-08-24 20:05:33',
     ],
     'user54' => [
@@ -768,7 +714,6 @@ return [
         'telegram' => 'ipsa',
         'self_description' => null,
         'role_id' => 2,
-        'fails_count' => 2,
         'date_registered' => '2021-08-29 06:05:50',
     ],
     'user55' => [
@@ -782,7 +727,6 @@ return [
         'telegram' => 'deleniti',
         'self_description' => null,
         'role_id' => 2,
-        'fails_count' => 4,
         'date_registered' => '2021-05-18 15:14:29',
     ],
     'user56' => [
@@ -796,7 +740,6 @@ return [
         'telegram' => null,
         'self_description' => null,
         'role_id' => 1,
-        'fails_count' => 5,
         'date_registered' => '2022-03-25 15:32:19',
     ],
     'user57' => [
@@ -810,7 +753,6 @@ return [
         'telegram' => null,
         'self_description' => 'Ut non sint unde recusandae exercitationem possimus. Deleniti culpa distinctio fuga adipisci assumenda consequatur. Suscipit quis quas maxime illum placeat cumque ducimus.',
         'role_id' => 2,
-        'fails_count' => 5,
         'date_registered' => '2021-10-11 00:57:34',
     ],
     'user58' => [
@@ -824,7 +766,6 @@ return [
         'telegram' => null,
         'self_description' => 'Maiores est et consequatur ea sit voluptate porro. Delectus eius necessitatibus quia debitis cupiditate consequuntur. Porro illum et non et fuga quo. Dolorum illum quis velit corrupti dolore ipsam quos. Aut exercitationem qui distinctio aut.',
         'role_id' => 1,
-        'fails_count' => 8,
         'date_registered' => '2020-10-04 20:46:39',
     ],
     'user59' => [
@@ -838,7 +779,6 @@ return [
         'telegram' => 'in',
         'self_description' => 'Nihil repellat et dolorem cum veritatis nesciunt. Quis ratione maxime qui quam in deleniti iste.',
         'role_id' => 1,
-        'fails_count' => 4,
         'date_registered' => '2022-02-28 11:30:48',
     ],
     'user60' => [
@@ -852,7 +792,6 @@ return [
         'telegram' => 'et',
         'self_description' => 'Maxime fugit doloribus ut dolor quibusdam quaerat. Ipsa expedita illum voluptatum dolor at assumenda. Deleniti harum deserunt qui et animi saepe. Dolor voluptatem optio aut temporibus corrupti sunt.',
         'role_id' => 1,
-        'fails_count' => 1,
         'date_registered' => '2020-04-30 18:53:03',
     ],
     'user61' => [
@@ -866,7 +805,6 @@ return [
         'telegram' => 'aliquid',
         'self_description' => null,
         'role_id' => 1,
-        'fails_count' => 6,
         'date_registered' => '2021-08-26 12:53:18',
     ],
     'user62' => [
@@ -880,7 +818,6 @@ return [
         'telegram' => 'et',
         'self_description' => 'Qui recusandae iste voluptate eos consequatur blanditiis similique nemo. Laboriosam impedit sed sed placeat id eum.',
         'role_id' => 2,
-        'fails_count' => 3,
         'date_registered' => '2021-11-03 17:34:44',
     ],
     'user63' => [
@@ -894,7 +831,6 @@ return [
         'telegram' => 'occaecati',
         'self_description' => 'Voluptatem dolores quibusdam nostrum ea consequatur odit perspiciatis. Ad ea et corrupti vel et repudiandae ducimus. Quae et aliquid officiis cupiditate maiores non explicabo. Illum nihil esse fuga praesentium voluptatem deleniti.',
         'role_id' => 2,
-        'fails_count' => 0,
         'date_registered' => '2020-07-29 01:33:46',
     ],
     'user64' => [
@@ -908,7 +844,6 @@ return [
         'telegram' => 'voluptatem',
         'self_description' => 'Vel culpa et officiis deleniti id ad facilis. Repellendus vel magnam vitae. Minus ullam et nostrum voluptas.',
         'role_id' => 1,
-        'fails_count' => 4,
         'date_registered' => '2020-06-24 07:12:33',
     ],
     'user65' => [
@@ -922,7 +857,6 @@ return [
         'telegram' => 'tenetur',
         'self_description' => 'Voluptate sed necessitatibus quia aut. Sunt consequatur rerum eos. Eum temporibus quam pariatur consequatur alias laudantium. Repudiandae commodi mollitia rerum explicabo qui minima.',
         'role_id' => 1,
-        'fails_count' => 6,
         'date_registered' => '2021-10-04 23:36:15',
     ],
     'user66' => [
@@ -936,7 +870,6 @@ return [
         'telegram' => 'molestiae',
         'self_description' => 'Soluta distinctio soluta est occaecati illo ut quia dolor. Impedit quo dolorum quia omnis vero dolore. Non vitae dicta autem quia. Rerum nostrum natus quo in rerum assumenda.',
         'role_id' => 1,
-        'fails_count' => 8,
         'date_registered' => '2021-03-17 15:21:16',
     ],
     'user67' => [
@@ -950,7 +883,6 @@ return [
         'telegram' => 'quis',
         'self_description' => 'Magnam officiis voluptas mollitia voluptas dolor non amet. Tempora quaerat id omnis ea. Dolorem architecto dolore quo vel in sapiente.',
         'role_id' => 2,
-        'fails_count' => 4,
         'date_registered' => '2021-02-17 23:35:02',
     ],
     'user68' => [
@@ -964,7 +896,6 @@ return [
         'telegram' => 'sit',
         'self_description' => 'Non libero voluptates ut omnis. Et dolorem dignissimos libero natus qui expedita cum. Voluptatibus aut alias corporis. Eaque nobis possimus voluptates veritatis explicabo.',
         'role_id' => 2,
-        'fails_count' => 3,
         'date_registered' => '2021-07-07 05:36:03',
     ],
     'user69' => [
@@ -978,7 +909,6 @@ return [
         'telegram' => 'odit',
         'self_description' => 'Cumque sapiente inventore consequatur soluta minus cupiditate ut. Et aspernatur inventore nulla nihil accusamus. Et qui tenetur maxime sint excepturi.',
         'role_id' => 2,
-        'fails_count' => 8,
         'date_registered' => '2020-09-12 03:23:21',
     ],
     'user70' => [
@@ -992,7 +922,6 @@ return [
         'telegram' => 'consequatur',
         'self_description' => 'Repudiandae voluptatibus minus illum voluptas ullam. Saepe sit saepe nihil architecto.',
         'role_id' => 2,
-        'fails_count' => 8,
         'date_registered' => '2021-02-24 17:49:12',
     ],
     'user71' => [
@@ -1006,7 +935,6 @@ return [
         'telegram' => 'iste',
         'self_description' => 'Eveniet sapiente nihil quod quae aspernatur exercitationem maxime. Ea voluptate sapiente aspernatur ab suscipit quos velit recusandae. Quo non sapiente qui. Cupiditate quia modi hic. Distinctio quam laudantium aut ut ut.',
         'role_id' => 2,
-        'fails_count' => 8,
         'date_registered' => '2020-12-01 05:10:59',
     ],
     'user72' => [
@@ -1020,7 +948,6 @@ return [
         'telegram' => null,
         'self_description' => 'Recusandae perferendis quia sed qui. Nihil est natus laboriosam a eum voluptatibus. Distinctio fuga ipsam dolor dolores.',
         'role_id' => 2,
-        'fails_count' => 5,
         'date_registered' => '2022-02-12 06:34:33',
     ],
     'user73' => [
@@ -1034,7 +961,6 @@ return [
         'telegram' => 'sit',
         'self_description' => 'Id doloribus sed dolorem asperiores quae nemo. Sint labore occaecati corrupti tempore nihil deserunt. Consequuntur qui tenetur consequatur eum fugit.',
         'role_id' => 1,
-        'fails_count' => 3,
         'date_registered' => '2020-11-17 00:25:00',
     ],
     'user74' => [
@@ -1048,7 +974,6 @@ return [
         'telegram' => null,
         'self_description' => 'Quaerat quod aperiam architecto adipisci. Qui temporibus et rem quidem aspernatur incidunt quibusdam. In pariatur expedita et soluta provident.',
         'role_id' => 2,
-        'fails_count' => 6,
         'date_registered' => '2021-02-20 17:36:49',
     ],
     'user75' => [
@@ -1062,7 +987,6 @@ return [
         'telegram' => 'voluptate',
         'self_description' => null,
         'role_id' => 2,
-        'fails_count' => 7,
         'date_registered' => '2021-10-11 10:58:13',
     ],
     'user76' => [
@@ -1076,7 +1000,6 @@ return [
         'telegram' => 'molestias',
         'self_description' => 'Mollitia tempore velit non est. Dolore dolores officia sed repellat in error eligendi. Praesentium nostrum esse impedit ut. Assumenda deserunt quisquam quae dolorum deserunt.',
         'role_id' => 2,
-        'fails_count' => 0,
         'date_registered' => '2022-01-14 06:03:21',
     ],
     'user77' => [
@@ -1090,7 +1013,6 @@ return [
         'telegram' => 'vitae',
         'self_description' => 'Blanditiis id ut nisi magnam ut nihil. Corrupti eos atque autem dolor aliquam. Maxime neque nobis excepturi blanditiis incidunt et.',
         'role_id' => 2,
-        'fails_count' => 6,
         'date_registered' => '2020-06-06 19:58:07',
     ],
     'user78' => [
@@ -1104,7 +1026,6 @@ return [
         'telegram' => 'sunt',
         'self_description' => null,
         'role_id' => 2,
-        'fails_count' => 9,
         'date_registered' => '2022-01-13 07:09:49',
     ],
     'user79' => [
@@ -1118,7 +1039,6 @@ return [
         'telegram' => null,
         'self_description' => 'Et placeat dolor itaque consequatur. Sequi consequatur neque optio incidunt. Explicabo eaque voluptas qui quia. Itaque quas cumque quis esse sed quo distinctio. Est quisquam molestiae velit hic alias sit et assumenda.',
         'role_id' => 2,
-        'fails_count' => 0,
         'date_registered' => '2021-01-21 08:25:41',
     ],
     'user80' => [
@@ -1132,7 +1052,6 @@ return [
         'telegram' => 'porro',
         'self_description' => 'Reprehenderit consectetur omnis totam molestias maxime pariatur. At voluptate et rerum ratione. Ut pariatur dicta praesentium voluptates. Ut quia explicabo omnis illo quis omnis.',
         'role_id' => 2,
-        'fails_count' => 6,
         'date_registered' => '2021-12-03 05:00:50',
     ],
     'user81' => [
@@ -1146,7 +1065,6 @@ return [
         'telegram' => null,
         'self_description' => 'Ad aspernatur error nesciunt dicta. Excepturi sint illum nisi ipsa. Beatae voluptatem laboriosam quas. Minus provident ea est magni est.',
         'role_id' => 1,
-        'fails_count' => 0,
         'date_registered' => '2020-07-20 03:40:50',
     ],
     'user82' => [
@@ -1160,7 +1078,6 @@ return [
         'telegram' => 'vel',
         'self_description' => null,
         'role_id' => 2,
-        'fails_count' => 0,
         'date_registered' => '2021-04-17 03:18:23',
     ],
     'user83' => [
@@ -1174,7 +1091,6 @@ return [
         'telegram' => 'consectetur',
         'self_description' => 'Omnis quas magnam sit quam blanditiis nesciunt. Voluptatem pariatur unde ullam soluta a modi. Voluptas delectus quaerat dolores voluptas. Voluptas deleniti reiciendis et possimus minus qui.',
         'role_id' => 2,
-        'fails_count' => 1,
         'date_registered' => '2020-09-15 21:37:04',
     ],
     'user84' => [
@@ -1188,7 +1104,6 @@ return [
         'telegram' => 'laboriosam',
         'self_description' => 'Quia sed ipsum quod cumque doloribus. Quaerat ab quo natus aut occaecati aliquid quis. Quia natus eos quaerat repellendus.',
         'role_id' => 2,
-        'fails_count' => 6,
         'date_registered' => '2022-03-18 15:48:51',
     ],
     'user85' => [
@@ -1202,7 +1117,6 @@ return [
         'telegram' => null,
         'self_description' => null,
         'role_id' => 2,
-        'fails_count' => 4,
         'date_registered' => '2020-11-14 09:37:10',
     ],
     'user86' => [
@@ -1216,7 +1130,6 @@ return [
         'telegram' => 'maxime',
         'self_description' => 'Molestiae earum voluptas et optio voluptatem similique porro. Sunt ipsa error sed. Sapiente temporibus et sit suscipit. Magni quia repellendus non adipisci debitis accusamus quis.',
         'role_id' => 1,
-        'fails_count' => 0,
         'date_registered' => '2022-02-17 02:51:32',
     ],
     'user87' => [
@@ -1230,7 +1143,6 @@ return [
         'telegram' => 'incidunt',
         'self_description' => 'Officiis qui error esse voluptas. Cumque et rem enim ut corrupti aut sit dolorem. Ad ipsa modi dolores commodi sint hic iste.',
         'role_id' => 1,
-        'fails_count' => 5,
         'date_registered' => '2021-12-17 07:27:33',
     ],
     'user88' => [
@@ -1244,7 +1156,6 @@ return [
         'telegram' => 'nesciunt',
         'self_description' => 'Voluptatibus ad qui iste. Fugiat qui est accusantium quia ea sequi. Iusto fuga eum amet laborum vitae ut sed mollitia.',
         'role_id' => 1,
-        'fails_count' => 4,
         'date_registered' => '2021-01-17 21:15:52',
     ],
     'user89' => [
@@ -1258,7 +1169,6 @@ return [
         'telegram' => null,
         'self_description' => null,
         'role_id' => 1,
-        'fails_count' => 7,
         'date_registered' => '2020-09-18 21:03:54',
     ],
     'user90' => [
@@ -1272,7 +1182,6 @@ return [
         'telegram' => 'nam',
         'self_description' => 'Optio nisi nulla sed nesciunt odit dolor est. Aspernatur voluptates sunt praesentium tempore sapiente. Numquam ratione recusandae qui. Eum iste et autem impedit et sit dignissimos.',
         'role_id' => 1,
-        'fails_count' => 3,
         'date_registered' => '2022-01-13 21:37:35',
     ],
     'user91' => [
@@ -1286,7 +1195,6 @@ return [
         'telegram' => 'in',
         'self_description' => 'Voluptas occaecati dolores nostrum debitis officiis. Eaque et dolorum eaque sequi. Aut voluptatem unde odit delectus consequatur.',
         'role_id' => 1,
-        'fails_count' => 4,
         'date_registered' => '2021-09-18 08:03:10',
     ],
     'user92' => [
@@ -1300,7 +1208,6 @@ return [
         'telegram' => 'atque',
         'self_description' => null,
         'role_id' => 2,
-        'fails_count' => 1,
         'date_registered' => '2021-06-24 20:08:45',
     ],
     'user93' => [
@@ -1314,7 +1221,6 @@ return [
         'telegram' => 'reprehenderit',
         'self_description' => 'Beatae quam sunt omnis. Maiores et et autem voluptas a. Enim et dolorum id consequuntur necessitatibus.',
         'role_id' => 2,
-        'fails_count' => 8,
         'date_registered' => '2021-08-19 16:32:11',
     ],
     'user94' => [
@@ -1328,7 +1234,6 @@ return [
         'telegram' => 'mollitia',
         'self_description' => 'Ullam sed consequatur eligendi pariatur magni minima non illo. Iusto explicabo provident maiores aut ut. Saepe similique eveniet architecto nobis.',
         'role_id' => 2,
-        'fails_count' => 1,
         'date_registered' => '2020-12-25 23:35:50',
     ],
     'user95' => [
@@ -1342,7 +1247,6 @@ return [
         'telegram' => 'autem',
         'self_description' => 'Sunt qui consectetur enim eius qui perferendis et. Aut est facilis ut est expedita ea debitis. Et reiciendis iste atque cum nam modi. Et dignissimos veniam atque.',
         'role_id' => 1,
-        'fails_count' => 5,
         'date_registered' => '2022-03-01 04:00:16',
     ],
     'user96' => [
@@ -1356,7 +1260,6 @@ return [
         'telegram' => 'sit',
         'self_description' => 'Eaque voluptate dolore itaque modi doloremque atque. Iusto qui error voluptatem rerum impedit accusamus magnam. Consectetur consequatur sunt optio autem fuga aut.',
         'role_id' => 2,
-        'fails_count' => 0,
         'date_registered' => '2021-11-18 12:39:18',
     ],
     'user97' => [
@@ -1370,7 +1273,6 @@ return [
         'telegram' => 'sed',
         'self_description' => 'Magnam et eum recusandae aut. Repellat facere est natus aperiam. Harum veritatis qui minus dignissimos autem. A velit voluptatum sed occaecati.',
         'role_id' => 1,
-        'fails_count' => 8,
         'date_registered' => '2022-03-31 18:12:35',
     ],
     'user98' => [
@@ -1384,7 +1286,6 @@ return [
         'telegram' => null,
         'self_description' => 'Ullam iusto repellat et dolorem. Sint qui officiis maxime sequi. Recusandae quia culpa est nobis aliquid qui eos. In dicta est similique voluptas occaecati nobis.',
         'role_id' => 2,
-        'fails_count' => 0,
         'date_registered' => '2021-11-24 12:55:16',
     ],
     'user99' => [
@@ -1398,7 +1299,6 @@ return [
         'telegram' => null,
         'self_description' => 'Dolores nesciunt porro culpa et iure. Accusantium impedit rem quo ut non et. Suscipit facilis rerum quod ut sequi aut quidem.',
         'role_id' => 2,
-        'fails_count' => 3,
         'date_registered' => '2022-03-30 21:38:22',
     ],
 ];

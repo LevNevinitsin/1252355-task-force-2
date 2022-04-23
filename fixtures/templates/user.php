@@ -19,6 +19,5 @@ return [
     'telegram'         => $faker->optional($weight = 0.8)->word(),
     'self_description' => $faker->optional($weight = 0.8)->paragraph(),
     'role_id'          => $faker->numberBetween(1, 2),
-    'fails_count'      => $faker->randomDigit(),
     'date_registered'  => $faker->dateTimeBetween('-2 years')->format('Y-m-d H:i:s'),
 ];
