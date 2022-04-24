@@ -1,6 +1,7 @@
 <?php
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
+use yii\helpers\Url;
 ?>
 
 <div class="left-menu left-menu--edit">
@@ -10,7 +11,7 @@ use yii\helpers\Html;
             <a class="link link--nav">Мой профиль</a>
         </li>
         <li class="side-menu-item">
-            <a href="/edit-profile/security" class="link link--nav">Безопасность</a>
+            <a href="<?= Url::to('/edit-profile/security') ?>" class="link link--nav">Безопасность</a>
         </li>
     </ul>
 </div>
@@ -20,7 +21,7 @@ use yii\helpers\Html;
         <div class="photo-editing">
             <div class="avatar-container">
                 <p class="form-label avatar-caption">Аватар</p>
-                <?php $userPhoto = Html::encode($user->photo) ?>
+                <?php $userPhoto = $user->photo?>
                 <?= Yii::$app->formatter->asImage($userPhoto ?? '', [
                     'class' => 'avatar-preview ' . ($userPhoto ? '' : 'avatar-preview--hidden'),
                     'width' => 83,
