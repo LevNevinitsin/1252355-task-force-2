@@ -5,7 +5,7 @@
 
 use app\assets\AppAsset;
 use app\assets\MainAsset;
-use yii\bootstrap4\Html;
+use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
@@ -31,7 +31,7 @@ $userIdentity = Yii::$app->user->identity;
 
 <header class="page-header">
     <nav class="main-nav">
-        <a <?= $currentPage === 'tasks' ? '' : 'href="/tasks"' ?> class="header-logo">
+        <a <?= $currentPage === 'tasks' ? '' : 'href="' . Url::to('/tasks') . '"' ?> class="header-logo">
             <img class="logo-image" src="/img/logotype.png" width=227 height=60 alt="taskforce">
         </a>
         <?php $isRegistrationPage = $currentPage === 'registration' ?>
@@ -42,7 +42,7 @@ $userIdentity = Yii::$app->user->identity;
                     <a class="link link--nav" >Новое</a>
                 </li>
                 <li class="list-item">
-                    <a href="/my-tasks" class="link link--nav" >Мои задания</a>
+                    <a href="<?= Url::to('/my-tasks') ?>" class="link link--nav" >Мои задания</a>
                 </li>
                 <?php if ($userIdentity->role_id === 1): ?>
                 <li class="list-item">
@@ -50,7 +50,7 @@ $userIdentity = Yii::$app->user->identity;
                 </li>
                 <?php endif ?>
                 <li class="list-item">
-                    <a href="/edit-profile" class="link link--nav" >Настройки</a>
+                    <a href="<?= Url::to('/edit-profile') ?>" class="link link--nav" >Настройки</a>
                 </li>
             </ul>
         </div>
@@ -65,11 +65,11 @@ $userIdentity = Yii::$app->user->identity;
             ) ?>
         </a>
         <div class="user-menu">
-            <p class="user-name"><?= $userIdentity->name ?></p>
+            <p class="user-name"><?= Html::encode($userIdentity->name) ?></p>
             <div class="popup-head">
                 <ul class="popup-menu">
                     <li class="menu-item">
-                        <a href="/edit-profile" class="link">Настройки</a>
+                        <a href="<?= Url::to('/edit-profile') ?>" class="link">Настройки</a>
                     </li>
                     <li class="menu-item">
                         <a href="#" class="link">Связаться с нами</a>

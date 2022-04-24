@@ -8,6 +8,7 @@ use app\assets\LandingAsset;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\authclient\widgets\AuthChoice;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 LandingAsset::register($this);
@@ -60,7 +61,7 @@ LandingAsset::register($this);
                 <a href="#" class="header__account-enter open-modal" data-for="enter-form">
                     <span>Вход</span></a>
                 или
-                <a href="/registration" class="header__account-registration">
+                <a href="<?= Url::to('/registration') ?>" class="header__account-registration">
                     Регистрация
                 </a>
                 <?php if ($authError = Yii::$app->getSession()->getFlash('authError')): ?>
@@ -77,7 +78,9 @@ LandingAsset::register($this);
                <p>Сломался кран на кухне? Надо отправить документы? Нет времени самому гулять с собакой?
                    У нас вы быстро найдёте исполнителя для любой жизненной ситуации?<br>
                    Быстро, безопасно и с гарантией. Просто, как раз, два, три. </p>
-               <button class="button">Создать аккаунт</button>
+                <p class="create-account">
+                   <a class="button" href="<?= Url::to('/registration') ?>">Создать аккаунт</a>
+                </p>
            </div>
            <div class="landing-center">
                <div class="landing-instruction">
