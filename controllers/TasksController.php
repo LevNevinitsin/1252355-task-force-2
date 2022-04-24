@@ -130,23 +130,28 @@ class TasksController extends Controller
             'base_uri' => $geocoderApiUri,
         ]);
 
-        try {
-            $response = $client->request('GET', '1.x', [
-                'query' => [
-                    'geocode' => "$task->longitude, $task->latitude",
-                    'apikey' => $geocoderApiKey,
-                    'format' => 'json',
-                 ],
-            ]);
+        if ($task->latitude && $task->longitude) {
+            try {
+                $response = $client->request('GET', '1.x', [
+                    'query' => [
+                        'geocode' => "$task->longitude, $task->latitude",
+                        'apikey' => $geocoderApiKey,
+                        'format' => 'json',
+                     ],
+                ]);
 
-            $content = $response->getBody()->getContents();
-            $responseData = json_decode($content, true);
-            $geoObject = ArrayHelper::getValue($responseData, 'response.GeoObjectCollection.featureMember.0.GeoObject');
-            $cityName = LocationService::getCity($geoObject);
-            $address = ArrayHelper::getValue($geoObject, 'name');
-        } catch (\Exception $e) {
-            $cityName = $task->city->name;
-            $address = $task->location;
+                $content = $response->getBody()->getContents();
+                $responseData = json_decode($content, true);
+                $geoObject = ArrayHelper::getValue($responseData, 'response.GeoObjectCollection.featureMember.0.GeoObject');
+                $cityName = LocationService::getCity($geoObject);
+                $address = ArrayHelper::getValue($geoObject, 'name');
+            } catch (\Exception $e) {
+                $cityName = $task->city->name;
+                $address = $task->location;
+            }
+        } else {
+            $cityName = $task->city->name ?? '';
+            $address = $task->location ?? '';
         }
 
         $response = new ResponseModel();

@@ -1,4 +1,6 @@
 <?php
+
+use yii\helpers\Html;
 use yii\helpers\StringHelper;
 use yii\helpers\Url;
 
@@ -21,7 +23,7 @@ $currentPage = Yii::$app->request->getPathInfo();
     <?php $taskUrl = Url::to(['/tasks/view', 'id' => $task->id]) ?>
     <div class="task-card">
         <div class="header-task">
-            <a  href="<?= $taskUrl ?>" class="link link--block link--big"><?= $task->overview ?></a>
+            <a  href="<?= $taskUrl ?>" class="link link--block link--big"><?= Html::encode($task->overview) ?></a>
             <p class="price price--task">
                 <?= Yii::$app->formatter->asCurrency($task->budget, 'RUB', [NumberFormatter::MAX_FRACTION_DIGITS => 0]) ?>
             </p>
@@ -29,7 +31,7 @@ $currentPage = Yii::$app->request->getPathInfo();
         <p class="info-text">
             <?= StringHelper::mb_ucfirst(Yii::$app->formatter->asRelativeTime($task->date_created)) ?>
         </p>
-        <p class="task-text"><?= $task->description ?></p>
+        <p class="task-text"><?= Html::encode($task->description) ?></p>
         <div class="footer-task">
             <p class="info-text town-text"><?= $task->city->name ?? 'Удалённая работа' ?></p>
             <p class="info-text category-text"><?= $task->category->name ?></p>

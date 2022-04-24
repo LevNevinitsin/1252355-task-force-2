@@ -13,12 +13,12 @@ $relevantResponses = ResponseService::getRelevant($currentUserId, $task);
 
 <div class="left-column">
     <div class="head-wrapper">
-        <h3 class="head-main"><?= $task->overview ?></h3>
+        <h3 class="head-main"><?= Html::encode($task->overview) ?></h3>
         <p class="price price--big">
             <?= Yii::$app->formatter->asCurrency($task->budget, 'RUB', [NumberFormatter::MAX_FRACTION_DIGITS => 0]) ?>
         </p>
     </div>
-    <p class="task-description"><?= $task->description ?></p>
+    <p class="task-description"><?= Html::encode($task->description) ?></p>
     <?= TaskService::getAvailableActionsMarkup($task) ?>
     <?php if ($taskLocation = $task->location): ?>
         <?php
@@ -40,13 +40,15 @@ $relevantResponses = ResponseService::getRelevant($currentUserId, $task);
             <?php foreach ($relevantResponses as $response): ?>
             <div class="response-card response-card--task">
                 <?php $responseUser = $response->user ?>
-                <?php if ($responseUserPhoto = $responseUser->photo): ?>
+                <?php if ($responseUserPhoto = Html::encode($responseUser->photo)): ?>
                 <img class="customer-photo" src="<?= $responseUserPhoto ?>" width="146" height="156" alt="Фото заказчика">
                 <?php else: ?>
                 <div class="customer-photo customer-photo--absent">Фото отсутствует</div>
                 <?php endif ?>
                 <div class="feedback-wrapper">
-                    <a href="<?= Url::to(['/users/view', 'id' => $responseUser->id]) ?>" class="link link--block link--big"><?= $responseUser->name ?></a>
+                    <a href="<?= Url::to(['/users/view', 'id' => $responseUser->id]) ?>" class="link link--block link--big">
+                        <?= Html::encode($responseUser->name) ?>
+                    </a>
                     <div class="response-wrapper">
                         <div class="stars-rating small">
                             <?php $userRoundedRating = round(UserService::getRating($responseUser)) ?>
@@ -66,10 +68,12 @@ $relevantResponses = ResponseService::getRelevant($currentUserId, $task);
                             )?>
                         </p>
                     </div>
-                    <p class="response-message"><?= $response->comment ?></p>
+                    <p class="response-message"><?= Html::encode($response->comment) ?></p>
                 </div>
                 <div class="feedback-wrapper">
-                    <p class="info-text"><span class="current-time"><?= StringHelper::mb_ucfirst(Yii::$app->formatter->asRelativeTime($response->date_created)) ?></span></p>
+                    <p class="info-text"><span class="current-time">
+                        <?= StringHelper::mb_ucfirst(Yii::$app->formatter->asRelativeTime($response->date_created)) ?></span>
+                    </p>
                     <p class="price price--small">
                         <?= Yii::$app->formatter->asCurrency($response->price, 'RUB', [NumberFormatter::MAX_FRACTION_DIGITS => 0]) ?>
                     </p>
@@ -92,7 +96,11 @@ $relevantResponses = ResponseService::getRelevant($currentUserId, $task);
         <h4 class="head-card">Информация о задании</h4>
         <dl class="black-list">
             <dt>Категория</dt>
-            <dd><a class="black-list-link" href="<?= Url::to(['/tasks', 'Category[id][]' => $task->category->id]) ?>"><?= $task->category->name ?></a></dd>
+            <dd>
+                <a class="black-list-link" href="<?= Url::to(['/tasks', 'Category[id][]' => $task->category->id]) ?>">
+                    <?= $task->category->name ?>
+                </a>
+            </dd>
             <dt>Дата публикации</dt>
             <dd><?= StringHelper::mb_ucfirst(Yii::$app->formatter->asRelativeTime($task->date_created)) ?></dd>
             <?php if ($taskDeadline = $task->deadline): ?>
@@ -110,7 +118,9 @@ $relevantResponses = ResponseService::getRelevant($currentUserId, $task);
         <ul class="enumeration-list">
             <?php foreach ($taskFiles as $taskFile): ?>
             <li class="enumeration-item">
-                <a href="<?= Url::to($taskFile->path) ?>" class="link link--block link--clip"><?= $taskFile->original_name ?></a>
+                <a href="<?= Url::to(Html::encode($taskFile->path)) ?>" class="link link--block link--clip">
+                    <?= Html::encode($taskFile->original_name) ?>
+                </a>
                 <p class="file-size">356 Кб</p>
             </li>
             <?php endforeach ?>

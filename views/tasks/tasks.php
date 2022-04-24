@@ -13,7 +13,7 @@ use yii\helpers\Url;
         <li class="task-card">
             <?php $taskUrl = Url::to(['/tasks/view', 'id' => $newTask->id]) ?>
             <div class="header-task">
-                <a  href="<?= $taskUrl ?>" class="link link--block link--big"><?= $newTask->overview ?></a>
+                <a  href="<?= $taskUrl ?>" class="link link--block link--big"><?= Html::encode($newTask->overview) ?></a>
                 <p class="price price--task">
                     <?= Yii::$app->formatter->asCurrency($newTask->budget, 'RUB', [NumberFormatter::MAX_FRACTION_DIGITS => 0]) ?>
                 </p>
@@ -21,7 +21,7 @@ use yii\helpers\Url;
             <p class="info-text">
                 <?= StringHelper::mb_ucfirst(Yii::$app->formatter->asRelativeTime($newTask->date_created)) ?>
             </p>
-            <p class="task-text"><?= $newTask->description ?></p>
+            <p class="task-text"><?= Html::encode($newTask->description) ?></p>
             <div class="footer-task">
                 <p class="info-text town-text"><?= $newTask->city->name ?? 'Удалённая работа' ?></p>
                 <p class="info-text category-text"><?= $newTask->category->name ?></p>
