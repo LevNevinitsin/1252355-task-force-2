@@ -20,7 +20,7 @@ use yii\helpers\Html;
         <div class="photo-editing">
             <div class="avatar-container">
                 <p class="form-label avatar-caption">Аватар</p>
-                <?php $userPhoto = Html::encode($user->photo) ?>
+                <?php $userPhoto = $user->photo?>
                 <?= Yii::$app->formatter->asImage($userPhoto ?? '', [
                     'class' => 'avatar-preview ' . ($userPhoto ? '' : 'avatar-preview--hidden'),
                     'width' => 83,
