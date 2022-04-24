@@ -20,13 +20,14 @@ use yii\helpers\Html;
         <div class="photo-editing">
             <div class="avatar-container">
                 <p class="form-label avatar-caption">Аватар</p>
-                <?= Yii::$app->formatter->asImage($user->photo ?? '', [
-                    'class' => 'avatar-preview ' . ($user->photo ? '' : 'avatar-preview--hidden'),
+                <?php $userPhoto = Html::encode($user->photo) ?>
+                <?= Yii::$app->formatter->asImage($userPhoto ?? '', [
+                    'class' => 'avatar-preview ' . ($userPhoto ? '' : 'avatar-preview--hidden'),
                     'width' => 83,
                     'height' => 83,
                     'alt' => 'Аватар'
                 ]) ?>
-                <?php if (!$user->photo): ?>
+                <?php if (!$userPhoto): ?>
                 <div class="avatar-preview avatar-preview--absent js-avatar-preview-absent">Аватар не выбран</div>
                 <?php endif ?>
             </div>

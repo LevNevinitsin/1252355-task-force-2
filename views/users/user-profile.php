@@ -2,13 +2,15 @@
 use yii\helpers\StringHelper;
 use yii\helpers\Url;
 use LevNevinitsin\Business\Service\UserService;
+use yii\helpers\Html;
+
 ?>
 
 <div class="left-column">
-    <h3 class="head-main"><?= $user->name ?></h3>
+    <h3 class="head-main"><?= Html::encode($user->name) ?></h3>
     <div class="user-card">
         <div class="photo-rate">
-            <?php if ($userPhoto = $user->photo): ?>
+            <?php if ($userPhoto = Html::encode($user->photo)): ?>
             <img class="card-photo" src="<?= $userPhoto ?>" width="191" height="190" alt="Фото пользователя">
             <?php else: ?>
             <div class="card-photo card-photo--absent">Фото отсутствует</div>
@@ -30,7 +32,7 @@ use LevNevinitsin\Business\Service\UserService;
                 <span class="current-rate"><?= Yii::$app->formatter->asDecimal($userRating, 2) ?></span>
             </div>
         </div>
-        <?php if ($userSelfDescription = $user->self_description): ?>
+        <?php if ($userSelfDescription = Html::encode($user->self_description)): ?>
         <p class="user-description"><?= $userSelfDescription ?></p>
         <?php endif ?>
     </div>
@@ -70,8 +72,8 @@ use LevNevinitsin\Business\Service\UserService;
             <div class="customer-photo customer-photo--absent customer-photo--user-profile">Фото отсутствует</div>
             <?php endif ?>
             <div class="feedback-wrapper">
-                <p class="feedback">«<?= $finishedTask->feedback ?>»</p>
-                <p class="task">Задание «<a href="<?= Url::to(['/tasks/view', 'id' => $finishedTask->id]) ?>" class="link link--small"><?= $finishedTask->overview ?></a>» выполнено</p>
+                <p class="feedback">«<?= Html::encode($finishedTask->feedback) ?>»</p>
+                <p class="task">Задание «<a href="<?= Url::to(['/tasks/view', 'id' => $finishedTask->id]) ?>" class="link link--small"><?= Html::encode($finishedTask->overview) ?></a>» выполнено</p>
             </div>
             <div class="feedback-wrapper">
                 <div class="stars-rating small">
@@ -112,7 +114,7 @@ use LevNevinitsin\Business\Service\UserService;
     <div class="right-card white">
         <h4 class="head-card">Контакты</h4>
         <ul class="enumeration-list">
-            <?php if ($userPhone = $user->phone): ?>
+            <?php if ($userPhone = Html::encode($user->phone)): ?>
             <li class="enumeration-item">
                 <a href="<?= Url::to("tel:+$userPhone") ?>" class="link link--block link--phone">
                     <?= Yii::$app->formatter->asPhone($userPhone) ?>
@@ -122,7 +124,7 @@ use LevNevinitsin\Business\Service\UserService;
             <li class="enumeration-item">
                 <?= Yii::$app->formatter->asEmail($user->email, ['class' => 'link link--block link--email']) ?>
             </li>
-            <?php if ($userTelegram = $user->telegram): ?>
+            <?php if ($userTelegram = Html::encode($user->telegram)): ?>
             <li class="enumeration-item">
                 <a href="<?= Url::to("https://t.me/$userTelegram") ?>" class="link link--block link--tg">@<?= $userTelegram ?></a>
             </li>
