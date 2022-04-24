@@ -46,6 +46,13 @@
   color: var(--error);
 }
 
+.landing-top .create-account {
+  margin: 0;
+  padding: 0;
+
+  line-height: 3.3;
+}
+
 /* --- Tasks list --- */
 
 .tasks-list {
