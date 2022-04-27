@@ -69,6 +69,20 @@ class TasksController extends Controller
                     ],
                 ],
             ],
+            [
+                'class' => 'yii\filters\HttpCache',
+                'only' => ['view'],
+                'cacheControlHeader' => 'Cache-Control: no-cache',
+                'etagSeed' => function ($action, $params) {
+                    $task = Task::findOne(Yii::$app->request->get('id'));
+                    $taskUpdateTimstamp = Yii::$app->formatter->asTimestamp($task->date_updated);
+
+                    $lastResponseTimestamp = Yii::$app->formatter
+                        ->asTimestamp($task->getResponses()->max('date_created'));
+
+                    return serialize([$taskUpdateTimstamp, $lastResponseTimestamp, Yii::$app->user->id]);
+                },
+            ],
         ];
     }
 
@@ -132,16 +146,22 @@ class TasksController extends Controller
 
         if ($task->latitude && $task->longitude) {
             try {
-                $response = $client->request('GET', '1.x', [
-                    'query' => [
-                        'geocode' => "$task->longitude, $task->latitude",
-                        'apikey' => $geocoderApiKey,
-                        'format' => 'json',
-                     ],
-                ]);
+                $cacheKey = "task-{$task->id}-location";
+                $cacheDuration = 86400;
 
-                $content = $response->getBody()->getContents();
-                $responseData = json_decode($content, true);
+                $responseData = Yii::$app->cache->getOrSet($cacheKey, function () use ($client, $task, $geocoderApiKey) {
+                    $response = $client->request('GET', '1.x', [
+                        'query' => [
+                            'geocode' => "$task->longitude, $task->latitude",
+                            'apikey' => $geocoderApiKey,
+                            'format' => 'json',
+                         ],
+                    ]);
+
+                    $content = $response->getBody()->getContents();
+                    return json_decode($content, true);
+                }, $cacheDuration);
+
                 $geoObject = ArrayHelper::getValue($responseData, 'response.GeoObjectCollection.featureMember.0.GeoObject');
                 $cityName = LocationService::getCity($geoObject);
                 $address = ArrayHelper::getValue($geoObject, 'name');
