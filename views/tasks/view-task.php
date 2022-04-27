@@ -20,16 +20,20 @@ $relevantResponses = ResponseService::getRelevant($currentUserId, $task);
     </div>
     <p class="task-description"><?= Html::encode($task->description) ?></p>
     <?= TaskService::getAvailableActionsMarkup($task) ?>
-    <?php if ($taskLocation = $task->location): ?>
-        <?php
-        $this->registerJsFile(
-            'https://api-maps.yandex.ru/2.1/?apikey=e666f398-c983-4bde-8f14-e3fec900592a&lang=ru_RU',
-            ['position' => $this::POS_HEAD]
-        );
-        $this->registerJsFile('/js/map.js');
-        ?>
+    <?php if ($task->location): ?>
         <div class="task-map">
+            <?php if ($task->latitude && $task->longitude): ?>
+                <?php
+                $this->registerJsFile(
+                    'https://api-maps.yandex.ru/2.1/?apikey=e666f398-c983-4bde-8f14-e3fec900592a&lang=ru_RU',
+                    ['position' => $this::POS_HEAD]
+                );
+                $this->registerJsFile('/js/map.js');
+                ?>
+            <?php endif ?>
+
             <div id="map" data-latitude="<?= $task->latitude ?>" data-longitude="<?= $task->longitude ?>"></div>
+
             <p class="map-address town"><?= Html::encode($cityName) ?></p>
             <p class="map-address"><?= Html::encode($address) ?></p>
         </div>
