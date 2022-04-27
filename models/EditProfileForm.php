@@ -12,7 +12,7 @@ class EditProfileForm extends Model
     public $birthdate;
     public $phone;
     public $telegram;
-    public $selfDescription;
+    public $self_description;
     public $chosenCategoriesIds;
 
     /**
@@ -26,7 +26,7 @@ class EditProfileForm extends Model
             ['birthdate', 'date', 'format' => 'php:Y-m-d'],
             ['phone', 'match', 'pattern' => '/^7\d{10}$/', 'message' => 'Введите номер в формате 79991234567'],
             ['telegram', 'string', 'max' => 64],
-            ['selfDescription', 'string'],
+            ['self_description', 'string'],
 
             ['chosenCategoriesIds', function ($attribute, $params, $validator, $current) {
                 if (Yii::$app->user->identity->role_id === 1) {
@@ -60,7 +60,7 @@ class EditProfileForm extends Model
             'birthdate' => 'День рождения',
             'phone' => 'Номер телефона',
             'telegram' => 'Telegram',
-            'selfDescription' => 'Информация о себе',
+            'self_description' => 'Информация о себе',
             'chosenCategoriesIds' => 'Выбор специализаций',
         ];
     }
