@@ -32,6 +32,8 @@ class AuthHandler
     /**
      * Handles successful authentication via Yii auth component
      *
+     * @throws AuthException if the city specified by the user in the auth client does not exist the database
+     *
      * @return void
      */
     public function handle()
@@ -101,6 +103,9 @@ class AuthHandler
      * @param City $city User city instance based on city name from auth client
      * @param array $attributes All attributes from auth client
      * @param string $clientName Auth client title
+     *
+     * @throws AuthException if User model has not passed validation
+     *
      * @return void
      */
     private function createAuthUser(int $id, string $email, City $city, array $attributes, string $clientName)
