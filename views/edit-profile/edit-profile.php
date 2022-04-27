@@ -49,7 +49,7 @@ use yii\helpers\Url;
             <?= $form->field($model, 'telegram')->textInput() ?>
         </div>
 
-        <?= $form->field($model, 'selfDescription')->textarea() ?>
+        <?= $form->field($model, 'self_description')->textarea() ?>
 
         <?php if ($user->role_id === 2): ?>
         <p class="control-label">Выбор специализаций</p>

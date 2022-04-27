@@ -10,8 +10,10 @@
   --vk: #0077ff;
   --vk-pale: #6cb5ff;
   --vk-light: #ecf5ff;
+  --red: #fa6400;
 
   --profile-checkbox-label: var(--grey-2);
+  --error: var(--red);
 }
 
 /* --- Landing page --- */
@@ -190,6 +192,20 @@
   border-top-left-radius: 15px;
 
   overflow: hidden;
+}
+
+#map[data-latitude=""] {
+  width: 605px;
+  height: 50px;
+  padding: 20px 60px;
+
+  text-align: center;
+}
+
+#map[data-latitude=""]::before {
+  content: "Не удалось отобразить лоакцию задания на карте: при создании задания не был выбран конкретный объект из списка.";
+
+  color: var(--grey);
 }
 
 .response-card {
@@ -443,6 +459,11 @@
 
 .add-task-container .add-task-form .half-wrapper input {
   margin-right: 0;
+}
+
+.autocomplete-no-result {
+  padding: 10px;
+  color: var(--error);
 }
 
 .add-task-form .add-files-container {

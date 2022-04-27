@@ -33,6 +33,17 @@ const config = {
   },
   debounce: 200,
   searchEngine: "loose",
+  resultsList: {
+    element: (list, data) => {
+      if (!data.results.length) {
+        const message = document.createElement("div");
+        message.classList.add('autocomplete-no-result');
+        message.textContent = `В вашем городе нет объектов с адресом "${data.query}"`;
+        list.appendChild(message);
+      }
+    },
+    noResults: true,
+  }
 }
 
 const autoCompleteJS = new autoComplete(config);

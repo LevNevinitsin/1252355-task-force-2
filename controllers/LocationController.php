@@ -31,12 +31,15 @@ class LocationController extends Controller
     }
 
     /**
-     * @param [type] $location Input value
-     * @param [type] $userCityName User city name for filtering results
-     * @param [type] $userCityCoordinates Coordinates to limit the geocoder search area
-     * @return void
+     * Performs direct geocoding based on the entered address, as well as being limited to the area around
+     * the coordinates of the user's city, followed by filtering by the name of the city.
+     *
+     * @param string $location Input value
+     * @param string $userCityName User city name for filtering results
+     * @param string $userCityCoordinates Coordinates to limit the geocoder search area
+     * @return array
      */
-    public function actionGeocode($location, $userCityName, $userCityCoordinates)
+    public function actionGeocode(string $location, string $userCityName, string $userCityCoordinates): array
     {
         $apiKey = 'e666f398-c983-4bde-8f14-e3fec900592a';
         $apiUri = 'https://geocode-maps.yandex.ru/';
@@ -94,7 +97,7 @@ class LocationController extends Controller
             $responseData = json_decode($e->getResponse()->getBody()->getContents(), true);
             $error = ArrayHelper::getValue($responseData, 'error');
             $message = ArrayHelper::getValue($responseData, 'message');
-            return "API error: $error. $message.";
+            return ["API error: $error. $message."];
         }
     }
 }
